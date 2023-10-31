@@ -1,5 +1,7 @@
 import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
+import Link from "next/link";
+import { Button } from "@features/ui";
 
 const IssuesPage = () => {
   return (
@@ -7,8 +9,36 @@ const IssuesPage = () => {
       <header className={styles.header}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
-        <a href={Routes.projects}>Dashboard</a>
+        <nav className={styles.navbar}>
+          <Button>
+            <Link className={styles.navbarButtons} href={"/"}>
+              Home
+            </Link>
+          </Button>
+          <Button>
+            <Link className={styles.navbarButtons} href={"/documentation"}>
+              documentation
+            </Link>
+          </Button>
+          <Button>
+            <Link className={styles.navbarButtons} href={"/pricing"}>
+              pricing
+            </Link>
+          </Button>
+          <Button>
+            <Link className={styles.navbarButtons} href={"/products"}>
+              products
+            </Link>
+          </Button>
+        </nav>
+        <Button>
+          <Link className={styles.dashboardButton} href={Routes.projects}>
+            Open Dashboard
+          </Link>
+        </Button>
+        {/* <a href={Routes.projects}>Dashboard</a> */}
       </header>
+
       <button
         className={styles.contactButton}
         onClick={() =>
