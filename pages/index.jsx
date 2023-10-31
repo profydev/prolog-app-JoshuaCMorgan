@@ -11,28 +11,34 @@ const IssuesPage = () => {
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
         <nav className={styles.navbar}>
           <Button>
-            <Link className={styles.buttonNavbar} href={"/"}>
+            <Link className={styles.navbarButtons} href={"/"}>
               Home
             </Link>
           </Button>
           <Button>
-            <Link className={styles.buttonNavbar} href={"/documentation"}>
+            <Link className={styles.navbarButtons} href={"/documentation"}>
               documentation
             </Link>
           </Button>
           <Button>
-            <Link className={styles.buttonNavbar} href={"/pricing"}>
+            <Link className={styles.navbarButtons} href={"/pricing"}>
               pricing
             </Link>
           </Button>
           <Button>
-            <Link className={styles.buttonNavbar} href={"/products"}>
+            <Link className={styles.navbarButtons} href={"/products"}>
               products
             </Link>
           </Button>
         </nav>
-        <a href={Routes.projects}>Dashboard</a>
+        <Button>
+          <Link className={styles.dashboardButton} href={Routes.projects}>
+            Open Dashboard
+          </Link>
+        </Button>
+        {/* <a href={Routes.projects}>Dashboard</a> */}
       </header>
+
       <button
         className={styles.contactButton}
         onClick={() =>
