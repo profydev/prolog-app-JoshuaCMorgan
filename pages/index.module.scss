@@ -25,10 +25,14 @@
 
 .dashboardButton {
   text-decoration: none;
-  background-color: color.$primary-700;
+  background-color: color.$primary-600;
   color: white;
   padding: 10px 18px;
   border-radius: 8px;
+}
+
+.dashboardButton:hover {
+  background-color: color.$primary-700;
 }
 
 .contactButton {
