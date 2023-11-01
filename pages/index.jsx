@@ -10,26 +10,18 @@ const IssuesPage = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
         <nav className={styles.navbar}>
-          <Button>
-            <Link className={styles.navbarButtons} href={"/"}>
-              Home
-            </Link>
-          </Button>
-          <Button>
-            <Link className={styles.navbarButtons} href={"/documentation"}>
-              documentation
-            </Link>
-          </Button>
-          <Button>
-            <Link className={styles.navbarButtons} href={"/pricing"}>
-              pricing
-            </Link>
-          </Button>
-          <Button>
-            <Link className={styles.navbarButtons} href={"/products"}>
-              products
-            </Link>
-          </Button>
+          <Link className={styles.navbarButtons} href={"/"}>
+            Home
+          </Link>
+          <Link className={styles.navbarButtons} href={"/documentation"}>
+            documentation
+          </Link>
+          <Link className={styles.navbarButtons} href={"/pricing"}>
+            pricing
+          </Link>
+          <Link className={styles.navbarButtons} href={"/products"}>
+            products
+          </Link>
         </nav>
         <Button>
           <Link className={styles.dashboardButton} href={Routes.projects}>
