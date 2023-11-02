@@ -19,6 +19,7 @@ const IssuesPage = () => {
           <Link className={styles.navbarButtons} href={"/pricing"}>
             pricing
           </Link>
+          np
           <Link className={styles.navbarButtons} href={"/products"}>
             products
           </Link>
