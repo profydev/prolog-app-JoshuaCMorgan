@@ -12,14 +12,13 @@ const IssuesPage = () => {
           <Link className={styles.navbarButtons} href={"/"}>
             Home
           </Link>
-          <Link className={styles.navbarButtons} href={"/documentation"}>
+          <Link className={styles.navbarButtons} href={Routes.documentation}>
             documentation
           </Link>
-          <Link className={styles.navbarButtons} href={"/pricing"}>
+          <Link className={styles.navbarButtons} href={Routes.pricing}>
             pricing
           </Link>
-          np
-          <Link className={styles.navbarButtons} href={"/products"}>
+          <Link className={styles.navbarButtons} href={Routes.products}>
             products
           </Link>
         </nav>
