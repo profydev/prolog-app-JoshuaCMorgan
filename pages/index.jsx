@@ -1,7 +1,6 @@
 import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
 import Link from "next/link";
-import { Button } from "@features/ui";
 
 const IssuesPage = () => {
   return (
@@ -24,11 +23,9 @@ const IssuesPage = () => {
             products
           </Link>
         </nav>
-        <Button>
-          <Link className={styles.dashboardButton} href={Routes.projects}>
-            Open Dashboard
-          </Link>
-        </Button>
+        <Link className={styles.dashboardButton} href={Routes.projects}>
+          Open Dashboard
+        </Link>
         {/* <a href={Routes.projects}>Dashboard</a> */}
       </header>
 
