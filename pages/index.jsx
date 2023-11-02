@@ -9,7 +9,7 @@ const IssuesPage = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
         <nav className={styles.navbar}>
-          <Link className={styles.navbarButtons} href={"/"}>
+          <Link className={styles.navbarButtons} href={Routes.home}>
             Home
           </Link>
           <Link className={styles.navbarButtons} href={Routes.documentation}>
