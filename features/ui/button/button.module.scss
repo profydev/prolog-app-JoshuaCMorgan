@@ -1,3 +1,7 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
 .button {
   cursor: pointer;
 
@@ -15,4 +19,112 @@
     border: 0;
     padding: 0;
   }
+
+  // application defaults placed here since all components have size
+  &.sm,
+  &.md,
+  &.lg,
+  &.xl {
+    border-radius: 0.5rem;
+    border: 1px solid color.$primary-600;
+    box-shadow: 0 1px 2px 0 rgb(16 24 40 / 5%);
+  }
+
+  // ===SIZES====
+  &.sm {
+    padding: space.$s2 space.$s3;
+    font: font.$text-sm-medium;
+  }
+
+  &.md {
+    padding: space.$s2-625 space.$s4;
+    font: font.$text-sm-medium;
+  }
+
+  &.lg {
+    padding: space.$s2-625 space.$s4-125;
+    font: font.$text-md-medium;
+  }
+
+  &.xl {
+    padding: space.$s3 space.$s5;
+    font: font.$text-md-medium;
+  }
+
+  // ====Color=====
+  &.primary {
+    background-color: color.$primary-600;
+    color: white;
+
+    // ====States===
+    &:hover {
+      background-color: color.$primary-700;
+      border: 1px solid color.$primary-700;
+    }
+
+    &:focus {
+      outline: 4px solid color.$primary-100;
+      border: 3px solid color.$primary-100;
+    }
+
+    &:disabled {
+      background-color: color.$primary-200;
+      border: 1px solid color.$primary-200;
+    }
+  }
+
+  &.secondary {
+    background-color: color.$primary-50;
+    color: color.$primary-700;
+    border: none;
+  }
+
+  &.gray {
+    background-color: white;
+    color: color.$gray-700;
+    border: 1px solid color.$gray-700;
+  }
+
+  &.empty {
+    background-color: none;
+    color: color.$primary-700;
+  }
+
+  &.empty-gray {
+    background-color: color.$primary-600;
+    color: white;
+  }
+
+  &.error {
+    background-color: color.$primary-600;
+    color: white;
+  }
 }
+
+/*
+===ATTRIBUTES===
+
+ - icon
+    - 'images/icons/example.png'
+
+    - only
+ - size
+    - small
+    - medium
+    - large
+    - xlarge
+ - color
+    - primary
+    - secondary
+    - grey
+    - empty
+    - empty grey
+    - error
+ - before
+ - after
+ - (state)
+    - default
+    - hover
+    - focused
+    - disabled
+*/
