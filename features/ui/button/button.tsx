@@ -23,6 +23,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size?: ButtonSize;
   color?: ButtonColor;
+  unstyled?: boolean;
   disabled?: boolean;
 }
 
@@ -30,22 +31,21 @@ export function Button({
   size = ButtonSize.sm,
   color = ButtonColor.primary,
   disabled = false,
+  unstyled = false,
   children,
   ...props
 }: ButtonProps) {
+  const classes = unstyled
+    ? classNames(styles.button, props.className)
+    : classNames(styles.button, styles[size], styles[color], props.className);
+
   console.log({ props });
+  console.log({ classes });
+
+  console.log(unstyled);
 
   return (
-    <button
-      {...props}
-      className={classNames(
-        styles.button,
-        styles[size],
-        styles[color],
-        props.className,
-      )}
-      disabled={disabled}
-    >
+    <button {...props} className={classes} disabled={disabled}>
       {children}
     </button>
   );

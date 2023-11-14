@@ -20,7 +20,7 @@ export function MenuItemButton({
 }: MenuItemProps) {
   return (
     <li className={classNames(styles.listItem, className)}>
-      <Button className={styles.anchor} onClick={onClick}>
+      <Button className={styles.anchor} onClick={onClick} unstyled={true}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className={isCollapsed ? styles.iconCollapse : styles.icon}
