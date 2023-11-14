@@ -17,6 +17,6 @@ export const Default: Story = {
     children: "Button CTO",
   },
   parameters: {
-    pseudo: { focus: true, hover: true },
+    pseudo: { focus: false, hover: false },
   },
 };
