@@ -65,6 +65,7 @@
 .menuIcon {
   display: block;
 
+  // since converting from img to Image, nextjs requires w/h to be properties of component.
   // width: space.$s10;
   // height: space.$s10;
 }

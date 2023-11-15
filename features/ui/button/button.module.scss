@@ -27,7 +27,6 @@
   &.xl {
     border-radius: 0.5rem;
     border: 1px solid color.$primary-600;
-    box-shadow: 0 1px 2px 0 rgb(16 24 40 / 5%);
   }
 
   // ===SIZES====
@@ -52,6 +51,13 @@
   }
 
   // ====Color=====
+  &.primary,
+  &.secondary,
+  &.gray,
+  &.error {
+    box-shadow: 0 1px 2px 0 rgb(16 24 40 / 5%);
+  }
+
   &.primary {
     background-color: color.$primary-600;
     color: white;
@@ -77,17 +83,70 @@
     background-color: color.$primary-50;
     color: color.$primary-700;
     border: none;
+
+    // === states ===
+    &:hover {
+      background-color: color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:focus {
+      background-color: color.$primary-50;
+      outline: 4px solid color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:disabled {
+      color: color.$primary-300;
+      background-color: color.$primary-25;
+      border: 1px solid color.$primary-25;
+    }
   }
 
   &.gray {
     background-color: white;
     color: color.$gray-700;
     border: 1px solid color.$gray-700;
+
+    // === states ===
+    &:hover {
+      color: color.$gray-800;
+      background-color: color.$gray-50;
+      border: 1px solid color.$primary-300;
+    }
+
+    &:focus {
+      outline: 4px solid color.$gray-100;
+      border: 1px solid color.$gray-300;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+      background-color: white;
+      border: 1px solid color.$gray-200;
+    }
   }
 
   &.empty {
     background-color: none;
     color: color.$primary-700;
+
+    // === states ===
+    &:hover {
+      background-color: color.$primary-50;
+      border: 1px solid color.$primary-50;
+    }
+
+    &:focus {
+      color: color.$primary-700;
+
+      // background-color: white;
+      border: 1px solid white;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+    }
   }
 
   &.empty-gray {
