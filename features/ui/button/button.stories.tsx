@@ -14,7 +14,7 @@ export const Default: Story = {
   args: {
     size: ButtonSize.sm,
     color: ButtonColor.primary,
-    children: "Button CTO",
+    children: "Button CTA",
   },
   parameters: {
     pseudo: { focus: false, hover: false },
