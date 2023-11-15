@@ -133,6 +133,7 @@
   &.empty {
     background-color: none;
     color: color.$primary-700;
+    border: 1px solid white;
 
     /* === STATES === */
     &:hover {
