@@ -39,11 +39,6 @@ export function Button({
     ? classNames(styles.button, props.className)
     : classNames(styles.button, styles[size], styles[color], props.className);
 
-  console.log({ props });
-  console.log({ classes });
-
-  console.log(unstyled);
-
   return (
     <button {...props} className={classes} disabled={disabled}>
       {children}
