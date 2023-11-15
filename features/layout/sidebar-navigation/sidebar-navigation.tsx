@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { NavigationContext } from "./navigation-context";
 import { MenuItemButton } from "./menu-item-button";
 import { MenuItemLink } from "./menu-item-link";
-import { Button } from "@features/ui";
+import { Button, ButtonIcon } from "@features/ui";
 import styles from "./sidebar-navigation.module.scss";
 
 const menuItems = [
@@ -48,13 +48,21 @@ export function SidebarNavigation() {
           <Button
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
             className={styles.menuButton}
+            unstyled={true}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <ButtonIcon
               src={isMobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
               alt={isMobileMenuOpen ? "close menu" : "open menu"}
               className={styles.menuIcon}
+              width={40}
+              height={40}
             />
+            {/* <img
+              src={isMobileMenuOpen ? "/icons/close.svg" : "/icons/menu.svg"}
+              alt={isMobileMenuOpen ? "close menu" : "open menu"}
+              className={styles.menuIcon}
+            /> */}
           </Button>
         </header>
         <div

@@ -7,6 +7,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+    "storybook-addon-pseudo-states",
   ],
 
   framework: {
@@ -33,5 +34,9 @@ module.exports = {
     config.resolve.alias["@styles"] = path.resolve("./styles");
     config.resolve.alias["@typings"] = path.resolve("./typings");
     return config;
+  },
+
+  docs: {
+    autodocs: true,
   },
 };

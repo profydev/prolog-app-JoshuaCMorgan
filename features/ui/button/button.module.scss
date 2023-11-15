@@ -1,3 +1,7 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
 .button {
   cursor: pointer;
 
@@ -15,4 +19,207 @@
     border: 0;
     padding: 0;
   }
+
+  // application defaults placed here since all components have size
+  &.sm,
+  &.md,
+  &.lg,
+  &.xl {
+    border-radius: 0.5rem;
+  }
+
+  /*  === SIZES ==== */
+  &.sm {
+    padding: space.$s2 space.$s3;
+    font: font.$text-sm-regular;
+  }
+
+  &.md {
+    padding: space.$s2-625 space.$s4;
+    font: font.$text-sm-regular;
+  }
+
+  &.lg {
+    padding: space.$s2-625 space.$s4-125;
+    font: font.$text-md-medium;
+  }
+
+  &.xl {
+    padding: space.$s3 space.$s5;
+    font: font.$text-md-medium;
+  }
+
+  /* === COLOR ==== */
+
+  /* empty buttons use outline/border instead of box-shadow */
+  &.primary,
+  &.secondary,
+  &.gray,
+  &.error {
+    box-shadow: 0 1px 2px 0 rgb(16 24 40 / 5%);
+  }
+
+  &.primary {
+    background-color: color.$primary-600;
+    color: white;
+    border: 1px solid color.$primary-600;
+
+    /* === STATES === */
+    &:hover {
+      background-color: color.$primary-700;
+      border: 1px solid color.$primary-700;
+    }
+
+    &:focus {
+      outline: 4px solid color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:disabled {
+      background-color: color.$primary-200;
+      border: 1px solid color.$primary-200;
+    }
+  }
+
+  &.secondary {
+    background-color: color.$primary-50;
+    color: color.$primary-700;
+    border: 1px solid color.$primary-50;
+
+    /* === STATES === */
+    &:hover {
+      background-color: color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:focus {
+      /*  to be visible to users with High Contrast Mode enabled, 'border' is used. Box-shadow will not work with High Contrast Mode.  'outline' could also be used. */
+      background-color: color.$primary-50;
+      outline: 4px solid color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:disabled {
+      color: color.$primary-300;
+      background-color: color.$primary-25;
+      border: 1px solid color.$primary-25;
+    }
+  }
+
+  &.gray {
+    background-color: white;
+    color: color.$gray-700;
+    border: 1px solid color.$gray-300;
+
+    /* === STATES === */
+    &:hover {
+      color: color.$gray-800;
+      background-color: color.$gray-50;
+      border: 1px solid color.$primary-300;
+    }
+
+    &:focus {
+      outline: 4px solid color.$gray-100;
+      border: 1px solid color.$gray-300;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+      background-color: white;
+      border: 1px solid color.$gray-200;
+    }
+  }
+
+  &.empty {
+    background-color: none;
+    color: color.$primary-700;
+    border: 1px solid white;
+
+    /* === STATES === */
+    &:hover {
+      background-color: color.$primary-50;
+      border: 1px solid color.$primary-50;
+    }
+
+    &:focus {
+      color: color.$primary-700;
+      background-color: white;
+      border: 1px solid white;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+    }
+  }
+
+  &.emptyGray {
+    color: color.$gray-500;
+    background-color: white;
+    border: 1px solid white;
+
+    /* === STATES === */
+    &:hover {
+      color: color.$gray-600;
+      background-color: color.$gray-50;
+      border: 1px solid color.$gray-50;
+    }
+
+    &:focus {
+      color: color.$gray-500;
+      background-color: white;
+      border: 1px solid white;
+      outline: transparent;
+    }
+
+    &:disabled {
+      color: color.$gray-300;
+    }
+  }
+
+  &.error {
+    background-color: color.$error-600;
+    color: white;
+    border: 1px solid color.$error-600;
+
+    /* === STATES === */
+    &:hover {
+      background-color: color.$error-700;
+      border: 1px solid color.$error-700;
+    }
+
+    &:focus {
+      background-color: color.$error-600;
+      outline: 4px solid color.$error-100;
+      border: 1px solid color.$error-100;
+    }
+
+    &:disabled {
+      background-color: color.$error-200;
+      border: 1px solid color.$error-200;
+    }
+  }
 }
+
+/*
+===ATTRIBUTES===
+
+ - size
+    - small
+    - medium
+    - large
+    - xlarge
+ - color
+    - primary
+    - secondary
+    - grey
+    - empty
+    - empty grey
+    - error
+ - before
+ - after
+ - (state)
+    - default
+    - hover
+    - focused
+    - disabled
+*/
