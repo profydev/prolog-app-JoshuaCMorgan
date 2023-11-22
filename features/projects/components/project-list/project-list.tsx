@@ -13,10 +13,25 @@ export function ProjectList() {
 
   /*
   The error message is displayed when the request fails.  
- 
-  'React Query will retry failed queries three times per default with exponential backoff'
-  
+
 */
+
+  /*
+  'React Query will retry failed queries three times per default with exponential backoff'
+  So, check for data first.
+*/
+  if (data) {
+    return (
+      <ul className={styles.list}>
+        {data?.map((project) => (
+          <li key={project.id}>
+            <ProjectCard project={project} />
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   if (isError) {
     return (
       <div>
@@ -27,14 +42,4 @@ export function ProjectList() {
       </div>
     );
   }
-
-  return (
-    <ul className={styles.list}>
-      {data?.map((project) => (
-        <li key={project.id}>
-          <ProjectCard project={project} />
-        </li>
-      ))}
-    </ul>
-  );
 }
