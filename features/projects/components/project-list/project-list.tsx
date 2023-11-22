@@ -5,7 +5,7 @@ import { Alert } from "@features/ui";
 import styles from "./project-list.module.scss";
 
 export function ProjectList() {
-  const { data, isLoading, isError } = useGetProjects();
+  const { data, isLoading, isError, refetch } = useGetProjects();
 
   if (isLoading) {
     return <div>Loading</div>;
@@ -13,7 +13,6 @@ export function ProjectList() {
 
   /*
   The error message is displayed when the request fails.  
-
 */
 
   /*
@@ -32,12 +31,16 @@ export function ProjectList() {
     );
   }
 
+  /*
+  RQ gives us refetching capabilities with same params. 
+*/
   if (isError) {
     return (
       <div>
         <Alert
           type="error"
           message="There was a problem while loading the project data"
+          action={() => refetch()}
         />
       </div>
     );
