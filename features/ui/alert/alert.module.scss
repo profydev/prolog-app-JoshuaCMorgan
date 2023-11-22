@@ -1,0 +1,29 @@
+@use "@styles/color";
+@use "@styles/space";
+
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: space.$s4;
+  border-radius: space.$s2;
+  gap: 0.75rem;
+}
+
+.error {
+  border: 1px solid color.$error-300;
+  background: color.$error-25;
+  color: color.$error-700;
+}
+
+.alertMessage {
+  margin-right: auto;
+}
+
+.alertButton {
+  display: flex;
+  align-items: center;
+  color: color.$error-700;
+  gap: space.$s2;
+  white-space: nowrap;
+}
