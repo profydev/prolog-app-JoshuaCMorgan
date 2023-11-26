@@ -1,23 +1,74 @@
 import capitalize from "lodash/capitalize";
 import mockProjects from "../fixtures/projects.json";
+/*
+-- spying and response stubbing
+--staticResponse is always last argument
+cy.intercept(url, staticResponse)
+cy.intercept(method, url, staticResponse)
+cy.intercept(routeMatcher, staticResponse)
+cy.intercept(url, routeMatcher, staticResponse)
 
+-- spying, dynamic stubbing, request modification, etc.
+cy.intercept(url, routeHandler)
+cy.intercept(method, url, routeHandler)
+cy.intercept(routeMatcher, routeHandler)
+cy.intercept(url, routeMatcher, routeHandler)
+*/
 describe("Project List", () => {
-  beforeEach(() => {
-    // setup request mock
-    cy.intercept("GET", "https://prolog-api.profy.dev/project", {
-      fixture: "projects.json",
-    }).as("getProjects");
+  context("request failure", () => {
+    it("renders an error notification containing a message and reload button", () => {
+      // Cypress will retry multiple times if there is a network error
+      cy.intercept(
+        { url: "https://prolog-api.profy.dev/project", times: 4 },
+        {
+          fixture: "projects.json",
+          forceNetworkError: true,
+          // retryOnNetworkFailure: false,
+        },
+      );
 
-    // open projects page
-    cy.visit("http://localhost:3000/dashboard");
+      cy.visit("http://localhost:3000/dashboard");
 
-    // wait for request to resolve
-    cy.wait("@getProjects");
+      // wait for React Query 3x retries
+      cy.get('[data-cy="alert-error"]', { timeout: 15000 }).should(
+        "be.visible",
+      );
+    });
+
+    it("reload after clicking 'try again' button will show project list of 3 items", () => {
+      cy.intercept(
+        { url: "https://prolog-api.profy.dev/project", times: 4 },
+        {
+          fixture: "projects.json",
+          forceNetworkError: true,
+          // retryOnNetworkFailure: false,
+        },
+      );
+
+      cy.visit("http://localhost:3000/dashboard");
+
+      // Find button and reload the page
+      cy.get('[data-cy="alert-error"]', { timeout: 15000 })
+        .find("button")
+        .click();
+
+      cy.get("main").find("li").should("have.length", 3);
+    });
   });
 
   context("desktop resolution", () => {
     beforeEach(() => {
       cy.viewport(1025, 900);
+      // setup request mock
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        fixture: "projects.json",
+      }).as("getProjects");
+
+      // open projects page
+      cy.visit("http://localhost:3000/dashboard");
+
+      // wait for request to resolve
+      cy.wait("@getProjects");
     });
 
     it("renders the projects", () => {
