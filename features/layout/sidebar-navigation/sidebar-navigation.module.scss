@@ -18,10 +18,6 @@
   &.isCollapsed {
     @media (min-width: breakpoint.$desktop) {
       width: 5.1875rem;
-
-      .logo {
-        width: 1.4375rem;
-      }
     }
   }
 }
@@ -49,10 +45,29 @@
 }
 
 .logo {
+  @media (min-width: breakpoint.$desktop) {
+    margin: space.$s0 space.$s4;
+  }
+}
+
+.smallLogo {
+  width: 1.4375rem;
+  display: none;
+
+  @media (min-width: breakpoint.$desktop) {
+    &.isCollapsed {
+      display: block;
+    }
+  }
+}
+
+.largeLogo {
   width: 7.375rem;
 
   @media (min-width: breakpoint.$desktop) {
-    margin: space.$s0 space.$s4;
+    &.isCollapsed {
+      display: none;
+    }
   }
 }
 

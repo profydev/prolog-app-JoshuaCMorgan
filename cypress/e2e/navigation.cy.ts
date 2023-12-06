@@ -50,6 +50,23 @@ describe("Sidebar Navigation", () => {
       // check that text is not rendered
       cy.get("nav").contains("Issues").should("not.exist");
     });
+
+    it("shows large logo after transitioning from desktop to mobile viewport in collapsed state", () => {
+      // collapse navigation
+      cy.get("nav").contains("Collapse").click();
+
+      // change viewport
+      cy.viewport("iphone-8");
+
+      // check that large logo is visible in collapsed state
+      cy.get("header")
+        .find('img[src="/icons/logo-large.svg"]')
+        .should("be.visible");
+
+      cy.get("header")
+        .find('img[src="/icons/logo-small.svg"]')
+        .should("not.be.visible");
+    });
   });
 
   context("mobile resolution", () => {
