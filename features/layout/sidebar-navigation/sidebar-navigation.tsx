@@ -40,7 +40,7 @@ export function SidebarNavigation() {
             src={"/icons/logo-small.svg"}
             alt="logo"
             className={classNames(
-              styles.logoSmall,
+              styles.smallLogo,
               isSidebarCollapsed && styles.isCollapsed,
             )}
           />
@@ -49,7 +49,7 @@ export function SidebarNavigation() {
             src={"/icons/logo-large.svg"}
             alt="logo"
             className={classNames(
-              styles.logoLarge,
+              styles.largeLogo,
               isSidebarCollapsed && styles.isCollapsed,
             )}
           />
