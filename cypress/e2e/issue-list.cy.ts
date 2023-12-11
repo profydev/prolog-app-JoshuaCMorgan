@@ -45,10 +45,22 @@ describe("Issue List", () => {
           cy.wrap($el).contains(issue.name);
           cy.wrap($el).contains(issue.message);
           cy.wrap($el).contains(issue.numEvents);
+          cy.wrap($el).contains(issue.numUsers);
           cy.wrap($el).contains(firstLineOfStackTrace);
         });
     });
 
+    it("contains accurate number of events and users for each issue", () => {
+      cy.get("main")
+        .find("tbody")
+        .find("tr")
+        .each(($el, index) => {
+          const issue = mockIssues1.items[index];
+
+          cy.wrap($el).find("td").eq(-2).should("have.text", issue.numEvents);
+          cy.wrap($el).find("td").eq(-1).should("have.text", issue.numUsers);
+        });
+    });
     it("paginates the data", () => {
       // test first page
       cy.contains("Page 1 of 3");
