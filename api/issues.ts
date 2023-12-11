@@ -12,5 +12,6 @@ export async function getIssues(
     params: { page },
     signal: options?.signal,
   });
+
   return data;
 }
