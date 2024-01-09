@@ -17,7 +17,7 @@ cy.intercept(url, routeMatcher, routeHandler)
 */
 describe("Project List", () => {
   context("request failure", () => {
-    it.skip("renders an error notification containing a message and reload button", () => {
+    it("renders an error notification containing a message and reload button", () => {
       // Cypress will retry multiple times if there is a network error
       cy.intercept(
         { url: "https://prolog-api.profy.dev/project", times: 4 },
@@ -36,7 +36,7 @@ describe("Project List", () => {
       );
     });
 
-    it.skip("reload after clicking 'try again' button will show project list of 3 items", () => {
+    it("reload after clicking 'try again' button will show project list of 3 items", () => {
       cy.intercept(
         { url: "https://prolog-api.profy.dev/project", times: 4 },
         {
@@ -72,7 +72,7 @@ describe("Project List", () => {
       cy.wait("@getProjects");
     });
 
-    it.skip("renders the projects", () => {
+    it("renders the projects", () => {
       const languageNames = ["React", "Node.js", "Python"];
 
       // get all project cards
