@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { ProjectLanguage } from "@api/projects.types";
+import { Loading } from "@features/ui";
 import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
@@ -18,7 +19,7 @@ export function IssueList() {
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   if (projects.isError) {
