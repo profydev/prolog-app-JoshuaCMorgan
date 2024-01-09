@@ -77,6 +77,7 @@ export function SidebarNavigation({ className }: SidebarNavigationProps) {
           )}
         />
         <nav
+          data-cy={"sidebar-nav-links"}
           className={classNames(
             styles.nav,
             isMobileMenuOpen && styles.isMobileMenuOpen,
