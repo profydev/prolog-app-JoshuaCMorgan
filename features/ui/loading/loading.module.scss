@@ -1,0 +1,19 @@
+@use "@styles/color";
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.loading {
+  animation: spinner 0.5s linear infinite;
+}
