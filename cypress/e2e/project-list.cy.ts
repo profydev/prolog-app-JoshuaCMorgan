@@ -73,16 +73,21 @@ describe("Project List", () => {
     });
 
     it("renders a loading spinner", () => {
+      // setup request mock wait some time before continuing
       cy.intercept("GET", "https://prolog-api.profy.dev/project", {
-        delayMs: 100,
+        // delayMs: 100,
         fixture: "projects.json",
       });
 
+      // during wait, open project page
       cy.visit(`http://localhost:3000/dashboard`);
 
+      // fetch spinner
       cy.get('[data-cy="loading"]').should("be.visible");
+      // request is resolved, spinner should be removed.
       cy.get('[data-cy="loading"]').should("not.exist");
     });
+
     it("renders the projects", () => {
       const languageNames = ["React", "Node.js", "Python"];
       const statusTexts: { [index: string]: string } = {

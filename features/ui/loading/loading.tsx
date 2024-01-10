@@ -5,6 +5,7 @@ export function Loading() {
     <div className={styles.container}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
+        data-cy="loading"
         className={styles.loading}
         src={"/icons/loading-circle.svg"}
         alt="loading-circle"
