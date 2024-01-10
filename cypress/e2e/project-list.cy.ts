@@ -16,46 +16,46 @@ cy.intercept(routeMatcher, routeHandler)
 cy.intercept(url, routeMatcher, routeHandler)
 */
 describe("Project List", () => {
-  context("request failure", () => {
-    it.skip("renders an error notification containing a message and reload button", () => {
-      // Cypress will retry multiple times if there is a network error
-      cy.intercept(
-        { url: "https://prolog-api.profy.dev/project", times: 4 },
-        {
-          fixture: "projects.json",
-          forceNetworkError: true,
-          // retryOnNetworkFailure: false,
-        },
-      );
+  // context("request failure", () => {
+  //   it("renders an error notification containing a message and reload button", () => {
+  //     // Cypress will retry multiple times if there is a network error
+  //     cy.intercept(
+  //       { url: "https://prolog-api.profy.dev/project", times: 4 },
+  //       {
+  //         fixture: "projects.json",
+  //         forceNetworkError: true,
+  //         // retryOnNetworkFailure: false,
+  //       },
+  //     );
 
-      cy.visit("http://localhost:3000/dashboard");
+  //     cy.visit("http://localhost:3000/dashboard");
 
-      // wait for React Query 3x retries
-      cy.get('[data-cy="alert-error"]', { timeout: 15000 }).should(
-        "be.visible",
-      );
-    });
+  //     // wait for React Query 3x retries
+  //     cy.get('[data-cy="alert-error"]', { timeout: 15000 }).should(
+  //       "be.visible",
+  //     );
+  //   });
 
-    it.skip("reload after clicking 'try again' button will show project list of 3 items", () => {
-      cy.intercept(
-        { url: "https://prolog-api.profy.dev/project", times: 4 },
-        {
-          fixture: "projects.json",
-          forceNetworkError: true,
-          // retryOnNetworkFailure: false,
-        },
-      );
+  //   it("reload after clicking 'try again' button will show project list of 3 items", () => {
+  //     cy.intercept(
+  //       { url: "https://prolog-api.profy.dev/project", times: 4 },
+  //       {
+  //         fixture: "projects.json",
+  //         forceNetworkError: true,
+  //         // retryOnNetworkFailure: false,
+  //       },
+  //     );
 
-      cy.visit("http://localhost:3000/dashboard");
+  //     cy.visit("http://localhost:3000/dashboard");
 
-      // Find button and reload the page
-      cy.get('[data-cy="alert-error"]', { timeout: 15000 })
-        .find("button")
-        .click();
+  //     // Find button and reload the page
+  //     cy.get('[data-cy="alert-error"]', { timeout: 15000 })
+  //       .find("button")
+  //       .click();
 
-      cy.get("main").find("li").should("have.length", 3);
-    });
-  });
+  //     cy.get("main").find("li").should("have.length", 3);
+  //   });
+  // });
 
   context("desktop resolution", () => {
     beforeEach(() => {
@@ -72,9 +72,29 @@ describe("Project List", () => {
       cy.wait("@getProjects");
     });
 
-    it.skip("renders the projects", () => {
-      const languageNames = ["React", "Node.js", "Python"];
+    it("renders a loading spinner", () => {
+      // setup request mock wait some time before continuing
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        // delayMs: 100,
+        fixture: "projects.json",
+      });
 
+      // during wait, open project page
+      cy.visit(`http://localhost:3000/dashboard`);
+
+      // fetch spinner
+      cy.get('[data-cy="loading"]').should("be.visible");
+      // request is resolved, spinner should be removed.
+      cy.get('[data-cy="loading"]').should("not.exist");
+    });
+
+    it("renders the projects", () => {
+      const languageNames = ["React", "Node.js", "Python"];
+      const statusTexts: { [index: string]: string } = {
+        [ProjectStatus.info]: "stable",
+        [ProjectStatus.warning]: "warning",
+        [ProjectStatus.error]: "critical",
+      };
       // get all project cards
       cy.get("main")
         .find("li")
@@ -84,7 +104,8 @@ describe("Project List", () => {
           cy.wrap($el).contains(languageNames[index]);
           cy.wrap($el).contains(mockProjects[index].numIssues);
           cy.wrap($el).contains(mockProjects[index].numEvents24h);
-          cy.wrap($el).contains(capitalize(mockProjects[index].status));
+          const status = mockProjects[index].status;
+          cy.wrap($el).contains(capitalize(statusTexts[status]));
           cy.wrap($el)
             .find("a")
             .should("have.attr", "href", "/dashboard/issues");
@@ -123,8 +144,7 @@ describe("Project List", () => {
           const element = cy.wrap($el).find("div[class^='badge_container']");
           // get status
           const status = mockProjects[index].status;
-          // check proper color for status
-
+          // check proper text for status
           element.invoke("text").should("eq", capitalize(statusTexts[status]));
         });
     });

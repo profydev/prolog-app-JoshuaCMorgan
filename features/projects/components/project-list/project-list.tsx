@@ -1,14 +1,14 @@
 import { ProjectCard } from "../project-card";
 import { useGetProjects } from "../../api/use-get-projects";
 
-import { Alert } from "@features/ui";
+import { Alert, Loading } from "@features/ui";
 import styles from "./project-list.module.scss";
 
 export function ProjectList() {
   const { data, isLoading, isError, refetch } = useGetProjects();
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   /*
