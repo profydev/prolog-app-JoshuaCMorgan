@@ -1,0 +1,87 @@
+@use "@styles/color";
+@use "styles/font";
+@use "styles/space";
+
+.sm {
+  font: font.$text-sm-medium;
+  gap: space.$s2;
+
+  & input {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+  }
+}
+
+.md {
+  gap: space.$s3;
+  font: font.$text-md-medium;
+
+  & input {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+  }
+}
+
+.checkboxWrapper {
+  /*
+using 'flex' parent occupies own line.
+using 'inline-flex', container occupies only necessary space on line.
+*/
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  color: color.$gray-700;
+
+  & input {
+    /*  Remove the native styling from the checkbox and apply custom styles.  */
+    appearance: none;
+    border: 1px solid color.$gray-300;
+    cursor: pointer;
+
+    &:indeterminate,
+    &:checked,
+    &:hover {
+      background-color: color.$primary-50;
+      border-color: color.$primary-600;
+    }
+
+    &:indeterminate {
+      background-image: url("/icons/minus.svg");
+      background-position: center;
+      background-size: 85%;
+    }
+
+    &:checked {
+      background-image: url("/icons/check.svg");
+      background-position: center;
+      background-size: 85%;
+    }
+
+    &:disabled {
+      background-color: color.$gray-100;
+      border-color: color.$gray-200;
+      cursor: not-allowed;
+    }
+
+    &:focus {
+      border-color: color.$primary-300;
+      box-shadow: 0 0 0 4px color.$primary-100;
+    }
+
+    &:indeterminate:disabled {
+      background-image: url("/icons/minus-gray.svg");
+      cursor: not-allowed;
+    }
+
+    &:checked:disabled {
+      background-image: url("/icons/check-disabled.svg");
+      cursor: not-allowed;
+    }
+
+    &:disabled + span {
+      color: color.$gray-300;
+    }
+  }
+}
