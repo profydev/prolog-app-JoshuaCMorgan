@@ -33,6 +33,6 @@ export const Default: Story = {
 export const BasicWithLabel: Story = {
   args: {
     placeholder: "olivia@untiledui.com",
-    name: "Email",
+    labelText: "Email",
   },
 };
