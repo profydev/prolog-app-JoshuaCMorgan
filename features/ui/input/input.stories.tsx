@@ -40,7 +40,7 @@ export const BasicWithLabel: Story = {
 export const BasicWithHint: Story = {
   args: {
     placeholder: "olivia@untiledui.com",
-    name: "Email",
+    labelText: "Email",
     hint: "This is a hint text to help user.",
   },
 };
