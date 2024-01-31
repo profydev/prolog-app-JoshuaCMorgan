@@ -14,6 +14,8 @@ type Story = StoryObj<typeof Input>;
 export const Default: Story = {
   args: {
     value: "",
+    name: "",
+    disabled: false,
   },
 
   render: function Render(args) {
@@ -24,6 +26,13 @@ export const Default: Story = {
     }
     console.log(args);
 
-    return <Input {...args} defaultValue={value} onChange={onChange} />;
+    return <Input {...args} onChange={onChange} />;
+  },
+};
+
+export const BasicWithLabel: Story = {
+  args: {
+    placeholder: "olivia@untiledui.com",
+    name: "Email",
   },
 };

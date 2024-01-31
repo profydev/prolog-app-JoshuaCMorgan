@@ -1,4 +1,34 @@
+@use "@styles/color";
+@use "styles/font";
+@use "styles/space";
+@use "styles/shadow";
+
+.rowWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: space.$s2;
+  width: 350px;
+}
+
 .inputWrapper {
   display: flex;
   align-items: center;
+  padding: 10px 14px;
+  gap: 8px;
+  border-radius: space.$s2;
+  border: 1px solid color.$gray-300;
+  background-color: #fff;
+  box-shadow: shadow.$xs;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font: font.$text-md-regular;
+}
+
+.label {
+  font: font.$text-md-regular;
+  text-transform: capitalize;
 }
