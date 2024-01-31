@@ -7,24 +7,27 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export function Input({
   type,
   name,
+  placeholder = "olivia@untitledui.com",
   labelText,
-  defaultValue,
+  value,
   onChange,
+  ...props
 }: InputProps) {
+  console.log({ props });
+
   return (
     <div className={styles.rowWrapper}>
       <label htmlFor={name} className={styles.label}>
-        {labelText || name}
+        {labelText}
       </label>
       <div className={styles.inputWrapper}>
         <input
           type={type}
-          id={name}
           name={name}
+          value={value}
           className={styles.input}
-          defaultValue={defaultValue || ""}
           onChange={onChange}
-          required
+          placeholder={placeholder}
         />
       </div>
     </div>
