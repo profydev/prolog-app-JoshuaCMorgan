@@ -36,3 +36,11 @@ export const BasicWithLabel: Story = {
     labelText: "Email",
   },
 };
+
+export const BasicWithHint: Story = {
+  args: {
+    placeholder: "olivia@untiledui.com",
+    name: "Email",
+    hint: "This is a hint text to help user.",
+  },
+};
