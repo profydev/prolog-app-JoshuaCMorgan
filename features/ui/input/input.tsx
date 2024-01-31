@@ -31,8 +31,6 @@ export function Input({
   const hasSuffix = Boolean(suffix);
 
   function validationHint() {
-    console.log({ hint, errorMessage });
-
     if (errorMessage || hint) {
       const style = errorMessage ? styles.errorMessage : styles.hint;
       const text = errorMessage ? errorMessage : hint;

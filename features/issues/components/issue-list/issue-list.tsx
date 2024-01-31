@@ -23,12 +23,10 @@ export function IssueList() {
   }
 
   if (projects.isError) {
-    console.error(projects.error);
     return <div>Error loading projects: {projects.error.message}</div>;
   }
 
   if (issuesPage.isError) {
-    console.error(issuesPage.error);
     return <div>Error loading issues: {issuesPage.error.message}</div>;
   }
 

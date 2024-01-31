@@ -24,7 +24,6 @@ export const Default: Story = {
     function onChange() {
       updateArgs({ value: value });
     }
-    console.log(args);
 
     return <Input {...args} onChange={onChange} />;
   },

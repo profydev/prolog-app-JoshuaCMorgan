@@ -26,7 +26,6 @@ export const Default: Story = {
     function onChange() {
       updateArgs({ checked: !checked });
     }
-    console.log(args);
 
     return <Checkbox {...args} checked={checked} onChange={onChange} />;
   },
