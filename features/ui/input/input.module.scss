@@ -26,6 +26,11 @@
   border: none;
   outline: none;
   font: font.$text-md-regular;
+
+  &:disabled {
+    color: color.$gray-500;
+    background-color: color.$gray-50;
+  }
 }
 
 .label {

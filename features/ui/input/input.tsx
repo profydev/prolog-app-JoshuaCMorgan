@@ -2,6 +2,12 @@ import styles from "./input.module.scss";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   labelText?: string;
+  iconSrc?: string;
+}
+
+function getIcon(iconSrc: string) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img className={styles.prefix} src={iconSrc} alt={iconSrc}></img>;
 }
 
 export function Input({
@@ -10,10 +16,11 @@ export function Input({
   placeholder = "olivia@untitledui.com",
   labelText,
   value,
+  iconSrc,
   onChange,
   ...props
 }: InputProps) {
-  console.log({ props });
+  const prefix = iconSrc && getIcon(iconSrc);
 
   return (
     <div className={styles.rowWrapper}>
@@ -21,7 +28,9 @@ export function Input({
         {labelText}
       </label>
       <div className={styles.inputWrapper}>
+        {prefix}
         <input
+          {...props}
           type={type}
           name={name}
           value={value}
