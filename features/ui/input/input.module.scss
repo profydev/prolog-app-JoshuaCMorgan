@@ -64,3 +64,11 @@
 .hint {
   font: font.$text-sm-regular;
 }
+
+.errorMessage {
+  color: red;
+}
+
+.hint {
+  color: color.$gray-500;
+}
