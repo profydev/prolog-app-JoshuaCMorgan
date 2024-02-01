@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { UserFormHookZod } from "./formHookZod";
+import { FormHookZod } from "./formHookZod";
 
-const meta: Meta<typeof UserFormHookZod> = {
-  component: UserFormHookZod,
-  title: "UI/UserFormHookZod",
+const meta: Meta<typeof FormHookZod> = {
+  component: FormHookZod,
+  title: "UI/FormHookZod",
 };
 
 export default meta;
 
-type Story = StoryObj<typeof UserFormHookZod>;
+type Story = StoryObj<typeof FormHookZod>;
 
 export const Default: Story = {
-  render: () => <UserFormHookZod />,
+  render: () => <FormHookZod />,
 };

@@ -1,51 +1,28 @@
-import styles from "./formHookZod.module.scss";
-
+import styles from "./inputHookZod.module.scss";
+import { userSchema, TUserSchema } from "./types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { string, z } from "zod";
+import { InputHookZod } from "./inputHookZod";
 
-const userSchema = z.object({
-  // name: string().min(1),
-  // email: string().email(),
-  firstName: string().min(3),
-});
-
-// interface IFormValues {
-//   // name: string;
-//   // email: string;
-//   firstName: string;
-// }
-
-// const handleFormSubmit: SubmitHandler<IFormValues> = (data) => {
-//   console.log({ data });
-// };
-
-type TUserSchema = z.infer<typeof userSchema>;
-
-const handleFormSubmit = (data: TUserSchema) => {
-  console.log({ data });
+const onSubmit = (data: TUserSchema) => {
+  console.log("SUCCESS", { data });
 };
-export function UserFormHookZod() {
+
+export function FormHookZod() {
   const { register, formState, handleSubmit } = useForm<TUserSchema>({
     resolver: zodResolver(userSchema),
   });
 
-  // const { register, formState, handleSubmit } = useForm<IFormValues>();
-
   const { errors } = formState;
-
-  console.log({ errors });
 
   return (
     <form
-      onSubmit={handleSubmit(handleFormSubmit)}
+      onSubmit={handleSubmit(onSubmit)}
       className={styles.formGroup}
+      noValidate
     >
-      <input type="text" {...register("firstName")} />
-      <p>{errors.firstName?.message}</p>
-      {/* <InputHook
-        register={register}
-        registerKey="name"
+      <InputHookZod
+        {...register("name")}
         errorMessage={errors.name ? errors.name.message : ""}
         hasError={Boolean(errors.name)}
         type="text"
@@ -53,10 +30,10 @@ export function UserFormHookZod() {
         hint="Maximum 100 Characters"
         iconSrc={"/icons/mail.svg"}
         placeholder="enter name"
-      ></InputHook> */}
-      {/* <InputHook
-        register={register}
-        registerKey="email"
+      ></InputHookZod>
+
+      <InputHookZod
+        {...register("email")}
         errorMessage={errors.email ? errors.email.message : ""}
         hasError={Boolean(errors.email)}
         type="email"
@@ -64,7 +41,7 @@ export function UserFormHookZod() {
         hint="Maximum 100 Characters"
         iconSrc={"/icons/mail.svg"}
         placeholder="jmorg0605@gmail.com"
-      ></InputHook> */}
+      ></InputHookZod>
 
       <button type="submit">Submit</button>
     </form>

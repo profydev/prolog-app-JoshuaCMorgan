@@ -3,16 +3,6 @@ import classNames from "classnames";
 import { forwardRef } from "react";
 import { FormFieldProps } from "./types";
 
-import React from "react";
-
-export const InputHookRef1 = forwardRef<HTMLInputElement, FormFieldProps>(
-  function InputHookRef(props, ref) {
-    console.log({ props });
-
-    return <input ref={ref} className="form-control" {...props} />;
-  },
-);
-
 export const InputHookRef = forwardRef<HTMLInputElement, FormFieldProps>(
   function InputHookRef(
     { label, errorMessage, hasError, hint, iconSrc, ...props },

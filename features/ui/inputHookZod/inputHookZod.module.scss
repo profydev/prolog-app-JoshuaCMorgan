@@ -3,6 +3,12 @@
 @use "styles/space";
 @use "styles/shadow";
 
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .rowWrapper {
   display: flex;
   flex-direction: column;

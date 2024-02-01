@@ -5,19 +5,13 @@ import { useForm } from "react-hook-form";
 import { validations } from "./utils";
 
 export function FormHookRef() {
-  const { register, formState, handleSubmit, getValues, watch } =
-    useForm<FormData>();
+  const { register, formState, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
     console.log({ data });
   };
 
   const { errors } = formState;
-
-  console.log({ errors });
-  console.log("watch", watch());
-  const values = getValues();
-  console.log({ values });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.formGroup}>
