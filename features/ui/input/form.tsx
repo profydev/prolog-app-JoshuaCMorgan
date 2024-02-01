@@ -24,7 +24,6 @@ export function UserForm() {
   const [error, setErrors] = useState({} as errors);
 
   const { name, email } = userData;
-  // const hasError = Boolean(Object.keys(error).length);
 
   function validateData() {
     // Use a type assertion to initialize a typed empty object in TypeScript.
