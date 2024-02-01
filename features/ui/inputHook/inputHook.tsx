@@ -1,36 +1,20 @@
-import styles from "./input.module.scss";
+import styles from "./inputHook.module.scss";
 import classNames from "classnames";
-import React from "react";
-import { Path, UseFormRegister } from "react-hook-form";
-
-interface IFormValues {
-  name: string;
-  email: string;
-}
-
-type InputProps = {
-  label?: string;
-  registerKey: Path<IFormValues>;
-  register: UseFormRegister<IFormValues>;
-  type?: string;
-  errorMessage?: string;
-  hint?: string;
-  iconSrc?: string;
-  hasError?: boolean;
-  placeholder?: string;
-};
+import { FormFieldProps } from "./types";
 
 export const InputHook = ({
   label,
+  name,
   register,
-  errorMessage,
+  validation,
+
   hasError,
+  error,
   type,
-  registerKey,
   hint,
   iconSrc,
   placeholder,
-}: InputProps) => {
+}: FormFieldProps) => {
   function getIcon(iconSrc: string) {
     // eslint-disable-next-line @next/next/no-img-element
     return <img className={styles.prefix} src={iconSrc} alt={iconSrc}></img>;
@@ -41,9 +25,9 @@ export const InputHook = ({
   const hasSuffix = Boolean(suffix);
 
   function validationHint() {
-    if (errorMessage || hint) {
-      const style = errorMessage ? styles.errorMessage : styles.hint;
-      const text = errorMessage ? errorMessage : hint;
+    if (error || hint) {
+      const style = error ? styles.errorMessage : styles.hint;
+      const text = error ? error.message : hint;
       return <div className={style}>{text}</div>;
     }
   }
@@ -60,7 +44,7 @@ export const InputHook = ({
         {prefix}
         <input
           type={type}
-          {...register(registerKey)}
+          {...register(name, validation)}
           className={styles.input}
           placeholder={placeholder}
         />
