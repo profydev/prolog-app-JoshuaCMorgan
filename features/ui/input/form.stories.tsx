@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { UserForm } from "./form";
+import { Form } from "./form";
 
-const meta: Meta<typeof UserForm> = {
-  component: UserForm,
-  title: "UI/UserForm",
+const meta: Meta<typeof Form> = {
+  component: Form,
+  title: "UI/Form",
 };
 
 export default meta;
 
-type Story = StoryObj<typeof UserForm>;
+type Story = StoryObj<typeof Form>;
 
 export const Default: Story = {
-  render: () => <UserForm />,
+  render: () => <Form />,
 };

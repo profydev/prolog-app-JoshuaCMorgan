@@ -3,9 +3,16 @@
 @use "styles/space";
 @use "styles/shadow";
 
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .rowWrapper {
   display: flex;
   flex-direction: column;
+  align-self: stretch;
   gap: space.$s2;
   width: 350px;
 }
@@ -26,6 +33,7 @@
 
   &:has(> .input:focus) {
     box-shadow: shadow.$focus-primary, shadow.$xs;
+    border-color: color.$primary-300;
 
     &.hasSuffix {
       box-shadow: shadow.$focus-error, shadow.$xs;
@@ -66,7 +74,7 @@
 }
 
 .errorMessage {
-  color: red;
+  color: color.$error-500;
 }
 
 .hint {

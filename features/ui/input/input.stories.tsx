@@ -13,33 +13,33 @@ type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
   args: {
-    value: "",
-    name: "",
+    placeholder: "olivia@untiledui.com",
     disabled: false,
   },
 
   render: function Render(args) {
     const [{ value }, updateArgs] = useArgs();
 
-    function onChange() {
-      updateArgs({ value: value });
-    }
-
-    return <Input {...args} onChange={onChange} />;
+    return (
+      <Input
+        {...args}
+        value={value}
+        onChange={(e) => updateArgs({ value: e.target.value })}
+      />
+    );
   },
 };
 
 export const BasicWithLabel: Story = {
   args: {
-    placeholder: "olivia@untiledui.com",
+    ...Default.args,
     labelText: "Email",
   },
 };
 
 export const BasicWithHint: Story = {
   args: {
-    placeholder: "olivia@untiledui.com",
-    labelText: "Email",
+    ...BasicWithLabel.args,
     hint: "This is a hint text to help user.",
   },
 };

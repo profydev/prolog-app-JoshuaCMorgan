@@ -1,89 +1,51 @@
-import styles from "./form.module.scss";
-import { useState } from "react";
+import styles from "./input.module.scss";
+import { userSchema, TUserSchema } from "./types";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "./input";
-import validator from "validator";
 
-interface errors {
-  name: string;
-  email: string;
-}
-
-function onSave(value: object) {
-  console.log({ value });
-}
-
-const user: { name: string; email: string } = {
-  name: "",
-  email: "",
+const onSubmit = (data: TUserSchema) => {
+  console.log("SUCCESS", { data });
 };
 
-export function UserForm() {
-  const [userData, setUserData] = useState(user);
-  console.log({ userData });
+export function Form() {
+  const { register, formState, handleSubmit } = useForm<TUserSchema>({
+    resolver: zodResolver(userSchema),
+  });
 
-  const [error, setErrors] = useState({} as errors);
+  const { errors } = formState;
 
-  const { name, email } = userData;
-
-  function validateData() {
-    // Use a type assertion to initialize a typed empty object in TypeScript.
-    const errors = {} as errors;
-
-    if (!name) {
-      errors.name = "Name is required";
-    }
-
-    if (!validator.isEmail(email)) {
-      errors.email = "A valid email is required";
-    }
-    return errors;
-  }
-
-  function handleSave(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const errors = validateData();
-    if (Object.keys(errors).length) {
-      setErrors(errors);
-      return;
-    }
-
-    setErrors({} as errors);
-    onSave(userData);
-  }
-
-  function updateForm(key: string) {
-    return function (event: React.ChangeEvent<HTMLInputElement>) {
-      setUserData((prev) => ({
-        ...prev,
-        [key]: event.target.value,
-      }));
-    };
-  }
   return (
-    <form onSubmit={handleSave} className={styles.formGroup}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={styles.formGroup}
+      noValidate
+    >
       <Input
+        {...register("name")}
+        id="name"
+        errorMessage={errors.name ? errors.name.message : ""}
+        hasError={Boolean(errors.name)}
         type="text"
-        name="name"
         labelText="name"
-        value={userData.name}
-        hasError={Boolean(error.name)}
-        errorMessage={error.name ?? ""}
         hint="Maximum 100 Characters"
-        onChange={updateForm("name")}
         iconSrc={"/icons/mail.svg"}
+        placeholder="enter name"
       ></Input>
+
       <Input
-        type="text"
-        name="email"
+        {...register("email")}
+        errorMessage={errors.email ? errors.email.message : ""}
+        id="email"
+        hasError={Boolean(errors.email)}
+        type="email"
         labelText="email"
-        value={userData.email}
-        hasError={Boolean(error.email)}
-        errorMessage={error.email ?? ""}
         hint="Maximum 100 Characters"
-        onChange={updateForm("email")}
         iconSrc={"/icons/mail.svg"}
+        placeholder="jmorg0605@gmail.com"
       ></Input>
-      <button type="submit">click</button>
+
+      <button type="submit">Submit</button>
     </form>
   );
 }

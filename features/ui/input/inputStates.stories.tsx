@@ -13,9 +13,8 @@ type Story = StoryObj<typeof Input>;
 export const Empty: Story = {
   args: {
     placeholder: "olivia@untiledui.com",
-    name: "",
+    name: "name",
     disabled: false,
-    value: "",
   },
 };
 

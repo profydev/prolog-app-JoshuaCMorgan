@@ -7,16 +7,19 @@ export const userSchema = z.object({
 
 export type TUserSchema = z.infer<typeof userSchema>;
 
-export type FormFieldProps = {
-  label?: string;
+export type InputProps = {
+  labelText?: string;
   name: ValidFieldNames;
+  id: ValidFieldNames;
   type?: string;
   errorMessage?: string;
   hint?: string;
   iconSrc?: string;
   hasError?: boolean;
   placeholder?: string;
-  validation?: object;
+  disabled?: boolean;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type ValidFieldNames = "name" | "email";

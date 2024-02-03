@@ -1,32 +1,19 @@
 import styles from "./input.module.scss";
 import classNames from "classnames";
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  labelText?: string;
-  errorMessage?: string;
-  hint?: string;
-  iconSrc?: string;
-  hasError?: boolean;
-}
+import React, { forwardRef } from "react";
+import { InputProps } from "./types";
 
 function getIcon(iconSrc: string) {
   // eslint-disable-next-line @next/next/no-img-element
   return <img className={styles.prefix} src={iconSrc} alt={iconSrc}></img>;
 }
 
-export function Input({
-  type,
-  name,
-  placeholder = "olivia@untitledui.com",
-  labelText,
-  value,
-  iconSrc,
-  errorMessage,
-  hasError,
-  hint,
-  onChange,
-  ...props
-}: InputProps) {
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+  { labelText, errorMessage, hasError, hint, iconSrc, name, ...props },
+  ref,
+) {
   const prefix = iconSrc && getIcon(iconSrc);
+  /* designs say error icon and error message are independent (i.e., you can have error icon without error message*/
   const suffix = hasError && getIcon("/icons/alert-circle.svg");
   const hasSuffix = Boolean(suffix);
 
@@ -34,7 +21,7 @@ export function Input({
     if (errorMessage || hint) {
       const style = errorMessage ? styles.errorMessage : styles.hint;
       const text = errorMessage ? errorMessage : hint;
-      return <div className={style}>{text}</div>;
+      return <span className={style}>{text}</span>;
     }
   }
 
@@ -50,18 +37,10 @@ export function Input({
         )}
       >
         {prefix}
-        <input
-          {...props}
-          type={type}
-          name={name}
-          value={value}
-          className={styles.input}
-          onChange={onChange}
-          placeholder={placeholder}
-        />
+        <input {...props} id={name} ref={ref} className={styles.input} />
         {suffix}
       </div>
       {validationHint()}
     </div>
   );
-}
+});

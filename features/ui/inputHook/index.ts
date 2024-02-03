@@ -1,1 +1,0 @@
-export { InputHook } from "./inputHook";
