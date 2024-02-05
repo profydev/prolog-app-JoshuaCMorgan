@@ -37,6 +37,7 @@
 
     &.hasSuffix {
       box-shadow: shadow.$focus-error, shadow.$xs;
+      border-color: color.$error-300;
     }
   }
 
