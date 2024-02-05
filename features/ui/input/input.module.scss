@@ -1,0 +1,82 @@
+@use "@styles/color";
+@use "styles/font";
+@use "styles/space";
+@use "styles/shadow";
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rowWrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: space.$s2;
+  width: 350px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  padding: space.$s2-625 space.$s3-875;
+  gap: space.$s2;
+  border-radius: space.$s2;
+  border: 1px solid color.$gray-300;
+  background-color: #fff;
+  box-shadow: shadow.$xs;
+
+  &.hasSuffix {
+    border-color: color.$error-300;
+  }
+
+  &:has(> .input:focus) {
+    box-shadow: shadow.$focus-primary, shadow.$xs;
+    border-color: color.$primary-300;
+
+    &.hasSuffix {
+      box-shadow: shadow.$focus-error, shadow.$xs;
+    }
+  }
+
+  img.prefix {
+    width: space.$s5;
+    height: space.$s5;
+  }
+
+  .input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font: font.$text-md-regular;
+
+    &:disabled {
+      color: color.$gray-500;
+      background-color: color.$gray-50;
+    }
+  }
+}
+
+.inputWrapper:has(> .input:disabled) {
+  color: color.$gray-500;
+  background-color: color.$gray-50;
+}
+
+.label {
+  font: font.$text-md-regular;
+  text-transform: capitalize;
+}
+
+.errorMessage,
+.hint {
+  font: font.$text-sm-regular;
+}
+
+.errorMessage {
+  color: color.$error-500;
+}
+
+.hint {
+  color: color.$gray-500;
+}

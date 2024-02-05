@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.8",
+    "@hookform/resolvers": "^3.3.4",
     "@tanstack/react-query": "^4.32.6",
     "@tanstack/react-query-devtools": "^4.32.6",
     "axios": "^1.4.0",
@@ -30,7 +31,9 @@
     "next": "^13.4.18",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "validator": "^13.11.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
@@ -45,6 +48,7 @@
     "@types/jest": "^29.5.3",
     "@types/lodash": "^4.14.197",
     "@types/node": "^20.5.0",
+    "@types/validator": "^13.11.8",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "babel-loader": "^9.1.3",
