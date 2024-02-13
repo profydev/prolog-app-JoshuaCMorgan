@@ -73,6 +73,10 @@ export function Select({
     setShowList(false);
   }
 
+  function isSelected(id: number) {
+    return id === Number(selectedValue?.id);
+  }
+
   function validationHint() {
     if (errorMessage || hint) {
       const style = errorMessage ? styles.errorMessage : styles.hint;
@@ -115,7 +119,7 @@ export function Select({
       <div className={styles.listContainer}>
         <ul className={styles.items}>
           {options.map((option, idx) => {
-            const { name } = option;
+            const { name, id } = option;
             return (
               <li
                 key={idx}
@@ -127,6 +131,27 @@ export function Select({
                 {prefix}
                 <input type="text" name={name} id={name} hidden />
                 <label htmlFor={name}>{name}</label>
+                {isSelected(id) && (
+                  <svg
+                    className={styles.icon}
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g id="check">
+                      <path
+                        id="Icon"
+                        d="M10 3L4.5 8.5L2 6"
+                        stroke="#7F56D9"
+                        strokeWidth="1.6666"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </g>
+                  </svg>
+                )}
               </li>
             );
           })}
