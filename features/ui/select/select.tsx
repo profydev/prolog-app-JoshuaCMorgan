@@ -48,7 +48,8 @@ type SelectProps = React.DetailedHTMLProps<
   labelText?: string;
   icon?: React.ReactNode;
   options: Array<SelectOption>;
-  disabled?: boolean;
+  errorMessage?: string;
+  hint?: string;
 };
 
 export function Select({
@@ -57,16 +58,27 @@ export function Select({
   labelText,
   options,
   icon,
+  errorMessage,
+  hint,
   ...props
 }: SelectProps) {
   const [showList, setShowList] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<SelectOption | null>(null);
 
   const prefix = icon && <span className={styles.icon}>{icon}</span>;
+  const hasError = Boolean(errorMessage);
 
   function handleSelection(selection: SelectOption) {
     setSelectedValue(selection);
     setShowList(false);
+  }
+
+  function validationHint() {
+    if (errorMessage || hint) {
+      const style = errorMessage ? styles.errorMessage : styles.hint;
+      const text = errorMessage ? errorMessage : hint;
+      return <span className={style}>{text}</span>;
+    }
   }
 
   return (
@@ -75,7 +87,12 @@ export function Select({
         <label htmlFor={name} className={styles.label}>
           {labelText}
         </label>
-        <span className={styles.inputContainer}>
+        <span
+          className={classNames(
+            styles.inputContainer,
+            hasError && styles.hasError,
+          )}
+        >
           {prefix}
           <input
             {...props}
@@ -94,6 +111,7 @@ export function Select({
           </button>
         </span>
       </div>
+      {!showList && validationHint()}
       <div className={styles.listContainer}>
         <ul className={styles.items}>
           {options.map((option, idx) => {

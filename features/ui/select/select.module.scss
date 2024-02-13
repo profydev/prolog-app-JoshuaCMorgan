@@ -97,3 +97,18 @@ button {
   cursor: pointer;
   display: inline-block;
 }
+
+.errorMessage,
+.hint {
+  display: block;
+  margin-top: space.$s2;
+  font: font.$text-sm-regular;
+}
+
+.errorMessage {
+  color: color.$error-500;
+}
+
+.hint {
+  color: color.$gray-500;
+}

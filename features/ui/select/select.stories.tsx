@@ -43,6 +43,22 @@ export const Disabled: Story = {
   },
 };
 
+export const Hint: Story = {
+  ...Label,
+  args: {
+    ...Label.args,
+    hint: "This is a hint text to help user.",
+  },
+};
+
+export const Error: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    errorMessage: "This is an error message.",
+  },
+};
+
 export const Icon: Story = {
   ...Default,
   args: {
