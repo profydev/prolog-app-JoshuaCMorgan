@@ -75,6 +75,7 @@
 .listContainer {
   position: absolute;
   overflow: hidden;
+  transition: 0.3s ease-in-out all;
   width: 320px;
   margin-top: space.$s2;
   background-color: #fff;
