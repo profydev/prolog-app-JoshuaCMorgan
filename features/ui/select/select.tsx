@@ -108,6 +108,8 @@ export function Select({
         <span
           className={classNames(
             styles.inputContainer,
+            showList && !hasError && styles.openFocus,
+            showList && hasError && styles.openErrorFocus,
             hasError && styles.hasError,
           )}
         >

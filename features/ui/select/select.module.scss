@@ -13,6 +13,36 @@
   border: 1px solid color.$gray-300;
   box-shadow: shadow.$xs;
   cursor: pointer;
+
+  &.hasError {
+    border-color: color.$error-300;
+  }
+
+  &:has(input:disabled) {
+    background: color.$gray-50;
+    color: color.$gray-500;
+    cursor: not-allowed;
+  }
+
+  &:has(> .input:focus) {
+    box-shadow: shadow.$focus-primary, shadow.$xs;
+    border-color: color.$primary-300;
+
+    &.hasError {
+      box-shadow: shadow.$focus-error, shadow.$xs;
+      border-color: color.$error-300;
+    }
+  }
+}
+
+.openFocus {
+  box-shadow: shadow.$focus-primary, shadow.$xs;
+  border-color: color.$primary-300;
+}
+
+.openErrorFocus {
+  box-shadow: shadow.$focus-error, shadow.$xs;
+  border-color: color.$error-300;
 }
 
 .selectionContainer {
