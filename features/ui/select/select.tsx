@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import styles from "./select.module.scss";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 const chevronUp = (
   <svg
@@ -65,12 +65,26 @@ export function Select({
   const [showList, setShowList] = useState<boolean>(false);
   const [selectedValue, setSelectedValue] = useState<SelectOption | null>(null);
 
+  const listContainerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
   const prefix = icon && <span className={styles.icon}>{icon}</span>;
   const hasError = Boolean(errorMessage);
 
   function handleSelection(selection: SelectOption) {
     setSelectedValue(selection);
     setShowList(false);
+  }
+
+  const listStyles = {
+    height: showList
+      ? `${listRef.current?.getBoundingClientRect().height}px`
+      : "0px",
+  };
+
+  function toggleList(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.stopPropagation();
+    setShowList(!showList);
   }
 
   function isSelected(id: number) {
@@ -87,7 +101,7 @@ export function Select({
 
   return (
     <div className={styles.selectContainer}>
-      <div className={styles.selectionContainer}>
+      <div className={styles.selectionContainer} onClick={toggleList}>
         <label htmlFor={name} className={styles.label}>
           {labelText}
         </label>
@@ -116,8 +130,12 @@ export function Select({
         </span>
       </div>
       {!showList && validationHint()}
-      <div className={styles.listContainer}>
-        <ul className={styles.items}>
+      <div
+        className={styles.listContainer}
+        ref={listContainerRef}
+        style={listStyles}
+      >
+        <ul className={styles.items} ref={listRef}>
           {options.map((option, idx) => {
             const { name, id } = option;
             return (
