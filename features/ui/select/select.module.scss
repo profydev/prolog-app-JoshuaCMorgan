@@ -32,6 +32,10 @@
   flex: 1;
   color: color.$gray-900;
   font: font.$text-md-regular;
+
+  &::placeholder {
+    color: color.$gray-500;
+  }
 }
 
 .selectContainer {
@@ -80,4 +84,16 @@
     cursor: pointer;
     background-color: color.$primary-50;
   }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
 }
