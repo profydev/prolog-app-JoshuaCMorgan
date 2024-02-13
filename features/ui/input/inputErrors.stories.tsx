@@ -38,3 +38,11 @@ export const EmptyWithIcon: Story = {
     iconSrc: "/icons/mail.svg",
   },
 };
+
+export const Message: Story = {
+  args: {
+    ...empty.args,
+    iconSrc: "/icons/mail.svg",
+    errorMessage: "This is an error message.",
+  },
+};

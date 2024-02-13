@@ -1,0 +1,145 @@
+@use "@styles/color";
+@use "styles/font";
+@use "styles/space";
+@use "styles/shadow";
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  width: 288px;
+  gap: space.$s2;
+  border-radius: space.$s2;
+  padding: space.$s2-625 space.$s3-875;
+  border: 1px solid color.$gray-300;
+  box-shadow: shadow.$xs;
+  cursor: pointer;
+
+  &.hasError {
+    border-color: color.$error-300;
+  }
+
+  &:has(input:disabled) {
+    background: color.$gray-50;
+    color: color.$gray-500;
+    cursor: not-allowed;
+  }
+
+  &:has(> .input:focus) {
+    box-shadow: shadow.$focus-primary, shadow.$xs;
+    border-color: color.$primary-300;
+
+    &.hasError {
+      box-shadow: shadow.$focus-error, shadow.$xs;
+      border-color: color.$error-300;
+    }
+  }
+}
+
+.openFocus {
+  box-shadow: shadow.$focus-primary, shadow.$xs;
+  border-color: color.$primary-300;
+}
+
+.openErrorFocus {
+  box-shadow: shadow.$focus-error, shadow.$xs;
+  border-color: color.$error-300;
+}
+
+.selectionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: space.$s2;
+}
+
+.label {
+  font: font.$text-md-regular;
+  color: color.$gray-700;
+  text-transform: capitalize;
+}
+
+.input {
+  all: unset;
+  flex: 1;
+  color: color.$gray-900;
+  font: font.$text-md-regular;
+
+  &::placeholder {
+    color: color.$gray-500;
+  }
+}
+
+.selectContainer {
+  position: relative;
+}
+
+.listContainer {
+  position: absolute;
+  overflow: hidden;
+  transition: 0.3s ease-in-out all;
+  width: 320px;
+  margin-top: space.$s2;
+  background-color: #fff;
+  border-radius: space.$s2;
+  box-shadow:
+    0 4px 6px -2px rgb(16 24 40 / 5%),
+    0 12px 16px -4px rgb(16 24 40 / 10%);
+
+  & .items {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    & label {
+      flex: 1;
+    }
+
+    & label,
+    input {
+      cursor: pointer;
+    }
+  }
+}
+
+.listItem {
+  box-sizing: border-box;
+  display: flex;
+  gap: space.$s2;
+  color: color.$gray-900;
+  font-size: 16px;
+  line-height: 24px;
+  padding: space.$s2-625 space.$s3-875;
+
+  &:hover {
+    cursor: pointer;
+    background-color: color.$primary-50;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.errorMessage,
+.hint {
+  display: block;
+  margin-top: space.$s2;
+  font: font.$text-sm-regular;
+}
+
+.errorMessage {
+  color: color.$error-500;
+}
+
+.hint {
+  color: color.$gray-500;
+}

@@ -12,7 +12,6 @@
 .rowWrapper {
   display: flex;
   flex-direction: column;
-  align-self: stretch;
   gap: space.$s2;
   width: 350px;
 }
@@ -37,6 +36,7 @@
 
     &.hasSuffix {
       box-shadow: shadow.$focus-error, shadow.$xs;
+      border-color: color.$error-300;
     }
   }
 
@@ -65,6 +65,7 @@
 
 .label {
   font: font.$text-md-regular;
+  color: color.$gray-700;
   text-transform: capitalize;
 }
 
