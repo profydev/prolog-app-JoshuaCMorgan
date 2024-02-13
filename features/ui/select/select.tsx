@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import styles from "./select.module.scss";
 import React, { useState, useRef } from "react";
+import useClickOutside from "./useClickOutside";
 
 const chevronUp = (
   <svg
@@ -70,6 +71,12 @@ export function Select({
 
   const prefix = icon && <span className={styles.icon}>{icon}</span>;
   const hasError = Boolean(errorMessage);
+
+  const handleClickOutside = () => {
+    setShowList(false);
+  };
+
+  const ref = useClickOutside(handleClickOutside);
 
   function handleSelection(selection: SelectOption) {
     setSelectedValue(selection);
@@ -147,6 +154,7 @@ export function Select({
                 onClick={() => {
                   handleSelection(option);
                 }}
+                ref={ref}
               >
                 {prefix}
                 <input type="text" name={name} id={name} hidden />
