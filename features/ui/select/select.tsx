@@ -24,15 +24,15 @@ export function Select({ name, labelText, options, ...props }: SelectProps) {
         <label htmlFor={name} className={styles.label}>
           {labelText}
         </label>
-      </div>
-      <div className={styles.inputContainer}>
-        <input
-          {...props}
-          id={name}
-          className={classNames(styles.input)}
-          defaultValue={selectedValue?.name}
-          readOnly
-        />
+        <span className={styles.inputContainer}>
+          <input
+            {...props}
+            id={name}
+            className={classNames(styles.input)}
+            defaultValue={selectedValue?.name}
+            readOnly
+          />
+        </span>
       </div>
       <div className={styles.listContainer}>
         <ul className={styles.items}>

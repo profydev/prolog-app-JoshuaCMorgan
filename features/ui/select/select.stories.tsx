@@ -25,3 +25,19 @@ export const Default: Story = {
     ],
   },
 };
+
+export const Label: Story = {
+  ...Default,
+  args: {
+    ...Default.args,
+    labelText: "Team member",
+  },
+};
+
+export const Disabled: Story = {
+  ...Label,
+  args: {
+    ...Label.args,
+    disabled: true,
+  },
+};
