@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Select } from "./select";
+import { useArgs } from "@storybook/preview-api";
 
 const meta: Meta<typeof Select> = {
   component: Select,
@@ -13,17 +14,28 @@ type Story = StoryObj<typeof Select>;
 export const Default: Story = {
   args: {
     placeholder: "Select team member",
-    name: "name",
     disabled: false,
     options: [
-      { name: "Pheonix Baker", id: 1 },
-      { name: "Olivia Rhye", id: 2 },
-      { name: "Lana Steiner", id: 3 },
-      { name: "Demi Wilkinson", id: 4 },
-      { name: "Candice Wu", id: 5 },
-      { name: "Natali Craig", id: 6 },
-      { name: "Drew Cano", id: 7 },
+      { value: "Pheonix Baker", label: "Pheonix Baker" },
+      { value: "Olivia Rhye", label: "Olivia Rhye" },
+      { value: "Lana Steiner", label: "Lana Steiner" },
+      { value: "Demi Wilkinson", label: "Demi Wilkinson" },
+      { value: "Candice Wu", label: "Candice Wu" },
+      { value: "Natali Craig", label: "Natali Craig" },
+      { value: "Drew Cano", label: "Drew Cano" },
     ],
+  },
+
+  render: function Render(args) {
+    const [{ value }, updateArgs] = useArgs();
+
+    return (
+      <Select
+        {...args}
+        value={value}
+        handleChange={(value) => updateArgs({ value })}
+      />
+    );
   },
 };
 

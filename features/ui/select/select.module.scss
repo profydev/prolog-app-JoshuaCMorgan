@@ -3,73 +3,43 @@
 @use "styles/space";
 @use "styles/shadow";
 
-.inputContainer {
+.selectionContainer {
   display: flex;
   align-items: center;
-  width: 288px;
+  width: 280px;
   gap: space.$s2;
   border-radius: space.$s2;
   padding: space.$s2-625 space.$s3-875;
   border: 1px solid color.$gray-300;
   box-shadow: shadow.$xs;
+  outline: none;
   cursor: pointer;
 
-  &.hasError {
+  & .value {
+    flex: 1;
+    color: color.$gray-900;
+    font: font.$text-md-regular;
+  }
+
+  & .hasError {
     border-color: color.$error-300;
   }
 
-  &:has(input:disabled) {
-    background: color.$gray-50;
-    color: color.$gray-500;
-    cursor: not-allowed;
-  }
-
-  &:has(> .input:focus) {
+  &:focus {
     box-shadow: shadow.$focus-primary, shadow.$xs;
     border-color: color.$primary-300;
 
-    &.hasError {
+    & .hasError {
       box-shadow: shadow.$focus-error, shadow.$xs;
       border-color: color.$error-300;
     }
   }
 }
 
-.openFocus {
-  box-shadow: shadow.$focus-primary, shadow.$xs;
-  border-color: color.$primary-300;
-}
-
-.openErrorFocus {
-  box-shadow: shadow.$focus-error, shadow.$xs;
-  border-color: color.$error-300;
-}
-
-.selectionContainer {
-  display: flex;
-  flex-direction: column;
-  gap: space.$s2;
-}
-
-.label {
-  font: font.$text-md-regular;
-  color: color.$gray-700;
-  text-transform: capitalize;
-}
-
-.input {
-  all: unset;
-  flex: 1;
-  color: color.$gray-900;
-  font: font.$text-md-regular;
-
-  &::placeholder {
-    color: color.$gray-500;
-  }
-}
-
-.selectContainer {
-  position: relative;
+.disabled {
+  background: color.$gray-50;
+  color: color.$gray-500;
+  cursor: not-allowed;
 }
 
 .listContainer {
@@ -90,43 +60,60 @@
     margin: 0;
     display: flex;
     flex-direction: column;
+  }
 
-    & label {
-      flex: 1;
-    }
+  & .listItem {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: space.$s2;
+    color: color.$gray-900;
+    font-size: 16px;
+    line-height: 24px;
+    padding: space.$s2-625 space.$s3-875;
 
-    & label,
-    input {
+    &:hover {
       cursor: pointer;
+      background-color: color.$primary-50;
     }
+  }
+
+  & .listItem > span:first-child {
+    flex: 1;
   }
 }
 
-.listItem {
-  box-sizing: border-box;
+.label {
   display: flex;
-  gap: space.$s2;
-  color: color.$gray-900;
-  font-size: 16px;
-  line-height: 24px;
-  padding: space.$s2-625 space.$s3-875;
+  flex-direction: column;
+  gap: space.$s1-375;
+  font: font.$text-sm-medium;
+  color: color.$gray-700;
+}
 
-  &:hover {
-    cursor: pointer;
-    background-color: color.$primary-50;
-  }
+.selected {
+  background-color: color.$primary-50;
+}
+
+.placeholder {
+  color: color.$gray-500;
+  flex-grow: 1;
+  font: font.$text-md-regular;
+}
+
+.openFocus {
+  box-shadow: shadow.$focus-primary, shadow.$xs;
+  border-color: color.$primary-300;
+}
+
+.openErrorFocus {
+  box-shadow: shadow.$focus-error, shadow.$xs;
+  border-color: color.$error-300;
 }
 
 .icon {
   width: 20px;
   height: 20px;
-  display: flex;
-}
-
-button {
-  all: unset;
-  cursor: pointer;
-  display: inline-block;
 }
 
 .errorMessage,

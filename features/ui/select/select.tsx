@@ -1,7 +1,6 @@
-import classNames from "classnames";
 import styles from "./select.module.scss";
-import React, { useState, useRef } from "react";
-import useClickOutside from "./useClickOutside";
+import classNames from "classnames";
+import { useState, useRef } from "react";
 
 const chevronUp = (
   <svg
@@ -20,6 +19,7 @@ const chevronUp = (
     />
   </svg>
 );
+
 const chevronDown = (
   <svg
     width="20"
@@ -37,51 +37,42 @@ const chevronDown = (
     />
   </svg>
 );
-export interface SelectOption {
-  name: string;
-  id: number;
-}
+
+type SelectOption = {
+  label: string;
+  value: string;
+};
 
 type SelectProps = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
+  React.HTMLAttributes<HTMLSpanElement>,
+  HTMLSpanElement
 > & {
-  labelText?: string;
+  options: SelectOption[];
   icon?: React.ReactNode;
-  options: Array<SelectOption>;
+  handleChange: (value: SelectOption | undefined) => void;
+  value?: SelectOption;
+  labelText?: string;
+  placeholder?: string;
   errorMessage?: string;
   hint?: string;
+  disabled?: boolean;
 };
 
 export function Select({
-  name,
-  placeholder,
   labelText,
+  value,
+  placeholder,
+  disabled,
+  handleChange,
   options,
   icon,
   errorMessage,
+  className,
   hint,
-  ...props
 }: SelectProps) {
-  const [showList, setShowList] = useState<boolean>(false);
-  const [selectedValue, setSelectedValue] = useState<SelectOption | null>(null);
-
+  const [showList, setShowList] = useState(false);
   const listContainerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
-
-  const prefix = icon && <span className={styles.icon}>{icon}</span>;
-  const hasError = Boolean(errorMessage);
-
-  const handleClickOutside = () => {
-    setShowList(false);
-  };
-
-  const ref = useClickOutside(handleClickOutside);
-
-  function handleSelection(selection: SelectOption) {
-    setSelectedValue(selection);
-    setShowList(false);
-  }
 
   const listStyles = {
     height: showList
@@ -89,13 +80,21 @@ export function Select({
       : "0px",
   };
 
-  function toggleList(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    event.stopPropagation();
-    setShowList(!showList);
+  const prefix = icon && <span className={styles.icon}>{icon}</span>;
+  const hasError = Boolean(errorMessage);
+
+  const suffix = showList ? (
+    <span className={styles.icon}>{chevronUp}</span>
+  ) : (
+    <span className={styles.icon}>{chevronDown}</span>
+  );
+
+  function selectOption(option: SelectOption) {
+    handleChange(option);
   }
 
-  function isSelected(id: number) {
-    return id === Number(selectedValue?.id);
+  function isSelected(option: string) {
+    return value?.value === option;
   }
 
   function validationHint() {
@@ -106,38 +105,35 @@ export function Select({
     }
   }
 
+  console.log({ disabled });
+
   return (
-    <div className={styles.selectContainer}>
-      <div className={styles.selectionContainer} onClick={toggleList}>
-        <label htmlFor={name} className={styles.label}>
-          {labelText}
-        </label>
-        <span
+    <div className={classNames(className)} onBlur={() => setShowList(false)}>
+      <label className={styles.label} htmlFor={labelText}>
+        {labelText}
+        <div
           className={classNames(
-            styles.inputContainer,
+            styles.selectionContainer,
             showList && !hasError && styles.openFocus,
             showList && hasError && styles.openErrorFocus,
             hasError && styles.hasError,
+            disabled && styles.disabled,
           )}
+          onClick={() => {
+            if (!disabled) {
+              setShowList((prev) => !prev);
+            }
+          }}
         >
           {prefix}
-          <input
-            {...props}
-            id={name}
-            className={classNames(styles.input)}
-            defaultValue={selectedValue?.name}
-            placeholder={placeholder}
-            readOnly
-          />
-          <button>
-            {showList ? (
-              <span className={styles.icon}>{chevronUp}</span>
-            ) : (
-              <span className={styles.icon}>{chevronDown}</span>
-            )}
-          </button>
-        </span>
-      </div>
+          <span
+            className={classNames(value ? styles.value : styles.placeholder)}
+          >
+            {value?.label || placeholder}
+          </span>
+          {suffix}
+        </div>
+      </label>
       {!showList && validationHint()}
       <div
         className={styles.listContainer}
@@ -145,44 +141,57 @@ export function Select({
         style={listStyles}
       >
         <ul className={styles.items} ref={listRef}>
-          {options.map((option, idx) => {
-            const { name, id } = option;
+          {options.map((option) => {
+            const selectedOption = isSelected(option.label);
             return (
               <li
-                key={idx}
-                className={styles.listItem}
                 onClick={() => {
-                  handleSelection(option);
+                  selectOption(option);
+                  setShowList(false);
                 }}
-                ref={ref}
+                key={option.value}
+                className={classNames(
+                  styles.listItem,
+                  selectedOption ? styles.selected : "",
+                )}
               >
-                {prefix}
-                <input type="text" name={name} id={name} hidden />
-                <label htmlFor={name}>{name}</label>
-                {isSelected(id) && (
-                  <svg
-                    className={styles.icon}
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g id="check">
-                      <path
-                        id="Icon"
-                        d="M10 3L4.5 8.5L2 6"
-                        stroke="#7F56D9"
-                        strokeWidth="1.6666"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </g>
-                  </svg>
+                <span>{option.label}</span>
+                {selectedOption && (
+                  <span className={styles.icon}>
+                    <svg
+                      className={styles.icon}
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="check">
+                        <path
+                          id="Icon"
+                          d="M10 3L4.5 8.5L2 6"
+                          stroke="#7F56D9"
+                          strokeWidth="1.6666"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                    </svg>
+                  </span>
                 )}
               </li>
             );
           })}
+
+          <li
+            className={styles.listItem}
+            onClick={() => {
+              handleChange(undefined);
+              setShowList(false);
+            }}
+          >
+            Clear Option
+          </li>
         </ul>
       </div>
     </div>
