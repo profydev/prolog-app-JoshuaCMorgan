@@ -108,7 +108,7 @@ export function Select({
   console.log({ disabled });
 
   return (
-    <div className={classNames(className)} onBlur={() => setShowList(false)}>
+    <div className={classNames(styles.parentContainer, className)}>
       <label className={styles.label} htmlFor={labelText}>
         {labelText}
         <div
@@ -119,6 +119,8 @@ export function Select({
             hasError && styles.hasError,
             disabled && styles.disabled,
           )}
+          tabIndex={0}
+          // onBlur={() => setShowList(false)}
           onClick={() => {
             if (!disabled) {
               setShowList((prev) => !prev);

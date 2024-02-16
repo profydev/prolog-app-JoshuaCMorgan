@@ -3,10 +3,14 @@
 @use "styles/space";
 @use "styles/shadow";
 
+.parentContainer {
+  position: relative;
+  width: 280px;
+}
+
 .selectionContainer {
   display: flex;
   align-items: center;
-  width: 280px;
   gap: space.$s2;
   border-radius: space.$s2;
   padding: space.$s2-625 space.$s3-875;
@@ -46,13 +50,14 @@
   position: absolute;
   overflow: hidden;
   transition: 0.3s ease-in-out all;
-  width: 320px;
+  width: 100%;
   margin-top: space.$s2;
   background-color: #fff;
   border-radius: space.$s2;
   box-shadow:
     0 4px 6px -2px rgb(16 24 40 / 5%),
     0 12px 16px -4px rgb(16 24 40 / 10%);
+  z-index: 1;
 
   & .items {
     list-style-type: none;
