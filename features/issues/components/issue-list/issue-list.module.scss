@@ -2,6 +2,12 @@
 @use "@styles/space";
 @use "@styles/font";
 
+.issueContainer {
+  display: flex;
+  flex-direction: column;
+  gap: space.$s6;
+}
+
 .container {
   background: white;
   border: 1px solid color.$gray-200;

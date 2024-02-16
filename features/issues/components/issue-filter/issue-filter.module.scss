@@ -1,0 +1,35 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+@use "@styles/breakpoint";
+
+.filterContainer {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: breakpoint.$desktop) {
+    flex-direction: column;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: space.$s2;
+}
+
+.filters {
+  display: flex;
+  gap: space.$s4;
+  justify-content: flex-end;
+}
+
+.select {
+  min-width: 160px;
+}
