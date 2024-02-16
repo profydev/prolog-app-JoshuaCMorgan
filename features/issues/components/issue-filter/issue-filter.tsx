@@ -24,52 +24,52 @@ export function IssueFilter() {
   >(undefined);
 
   return (
-    <div
-      className={styles.filterContainer}
-      //   onSubmit={handleSubmit(onSubmit)}
-      // className={styles.formGroup}
-      //   noValidate
-    >
-      <Button size={ButtonSize.lg} className={styles.btn}>
-        <span className={styles.icon}>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16.6667 5L7.50001 14.1667L3.33334 10"
-              stroke="white"
-              stroke-width="1.67"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </span>
-        Resolve selected issues
-      </Button>
-      <div className={styles.filters}>
-        <Select
-          className={styles.select}
-          options={statusOptions}
-          handleChange={(option) => {
-            setStatusValue(option);
-          }}
-          value={statusValue}
-          placeholder="Status"
-        />
-        <Select
-          className={styles.select}
-          options={errorOptions}
-          handleChange={(option) => {
-            setErrorValue(option);
-          }}
-          value={errorValue}
-          placeholder="Level"
-        />
-        <Input iconSrc={"/icons/hour-glass.svg"}></Input>
+    <div className={styles.filterContainer}>
+      <div className={styles.filterContent}>
+        <Button size={ButtonSize.lg} className={styles.resolveBtn}>
+          <span className={styles.icon}>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.6667 5L7.50001 14.1667L3.33334 10"
+                stroke="white"
+                stroke-width="1.67"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          Resolve selected issues
+        </Button>
+        <div className={styles.filters}>
+          <Select
+            className={styles.select}
+            options={statusOptions}
+            handleChange={(option) => {
+              setStatusValue(option);
+            }}
+            value={statusValue}
+            placeholder="Status"
+          />
+          <Select
+            className={styles.select}
+            options={errorOptions}
+            handleChange={(option) => {
+              setErrorValue(option);
+            }}
+            value={errorValue}
+            placeholder="Level"
+          />
+          <Input
+            className={styles.input}
+            iconSrc={"/icons/hour-glass.svg"}
+          ></Input>
+        </div>
       </div>
     </div>
   );
