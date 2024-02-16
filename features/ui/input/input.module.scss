@@ -3,18 +3,11 @@
 @use "styles/space";
 @use "styles/shadow";
 
-.rowWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: space.$s2;
-}
-
 .inputWrapper {
   display: flex;
   align-items: center;
   padding: space.$s2-625 space.$s3-875;
   gap: space.$s2;
-  width: 280px;
   border-radius: space.$s2;
   border: 1px solid color.$gray-300;
   background-color: #fff;
@@ -59,6 +52,7 @@
 }
 
 .label {
+  width: 280px;
   display: flex;
   flex-direction: column;
   gap: space.$s1-375;
