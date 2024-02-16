@@ -3,17 +3,10 @@
 @use "styles/space";
 @use "styles/shadow";
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .rowWrapper {
   display: flex;
   flex-direction: column;
   gap: space.$s2;
-  width: 350px;
 }
 
 .inputWrapper {
@@ -21,6 +14,7 @@
   align-items: center;
   padding: space.$s2-625 space.$s3-875;
   gap: space.$s2;
+  width: 280px;
   border-radius: space.$s2;
   border: 1px solid color.$gray-300;
   background-color: #fff;
@@ -49,6 +43,7 @@
     width: 100%;
     border: none;
     outline: none;
+    padding: 0;
     font: font.$text-md-regular;
 
     &:disabled {
@@ -64,7 +59,10 @@
 }
 
 .label {
-  font: font.$text-md-regular;
+  display: flex;
+  flex-direction: column;
+  gap: space.$s1-375;
+  font: font.$text-sm-medium;
   color: color.$gray-700;
   text-transform: capitalize;
 }

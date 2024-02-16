@@ -9,7 +9,7 @@ function getIcon(iconSrc: string) {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { labelText, errorMessage, hasError, hint, iconSrc, name, ...props },
+  { labelText, errorMessage, hasError, hint, iconSrc, className, ...props },
   ref,
 ) {
   const prefix = iconSrc && getIcon(iconSrc);
@@ -26,10 +26,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   }
 
   return (
-    <div className={styles.rowWrapper}>
-      <label htmlFor={name} className={styles.label}>
-        {labelText}
-      </label>
+    <label className={classNames(styles.label, className)}>
+      {labelText}
       <div
         className={classNames(
           styles.inputWrapper,
@@ -37,10 +35,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         )}
       >
         {prefix}
-        <input {...props} id={name} ref={ref} className={styles.input} />
+        <input {...props} ref={ref} className={styles.input} />
         {suffix}
       </div>
       {validationHint()}
-    </div>
+    </label>
   );
 });
