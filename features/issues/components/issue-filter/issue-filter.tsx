@@ -1,18 +1,18 @@
 import { Select, Button, ButtonSize, Input } from "@features/ui";
 import styles from "./issue-filter.module.scss";
-// import { useFilters } from "./use-filters";
-// import { useRouter } from "next/router";
+import { IssueLevel, IssueStatus } from "@api/issues.types";
+import { useFilter } from "./use-filter";
 import { useState } from "react";
 
 const statusOptions = [
-  { value: "Unresolved", label: "Unresolved" },
-  { value: "Resolved", label: "Resolved" },
+  { value: "open", label: "Uresolved" },
+  { value: "resolved", label: "Resolved" },
 ];
 
 const errorOptions = [
-  { value: "Error", label: "Error" },
-  { value: "Warning", label: "Warning" },
-  { value: "Info", label: "Info" },
+  { value: "error", label: "Error" },
+  { value: "warning", label: "Warning" },
+  { value: "info", label: "Info" },
 ];
 
 export function IssueFilter() {
@@ -22,6 +22,8 @@ export function IssueFilter() {
   const [errorValue, setErrorValue] = useState<
     (typeof errorOptions)[0] | undefined
   >(undefined);
+
+  const { handleFilterChange } = useFilter();
 
   return (
     <div className={styles.filterContainer}>
@@ -52,6 +54,9 @@ export function IssueFilter() {
             options={statusOptions}
             handleChange={(option) => {
               setStatusValue(option);
+              handleFilterChange({
+                status: option?.value as IssueStatus | undefined,
+              });
             }}
             value={statusValue}
             placeholder="Status"
@@ -61,6 +66,9 @@ export function IssueFilter() {
             options={errorOptions}
             handleChange={(option) => {
               setErrorValue(option);
+              handleFilterChange({
+                level: option?.value as IssueLevel | undefined,
+              });
             }}
             value={errorValue}
             placeholder="Level"
