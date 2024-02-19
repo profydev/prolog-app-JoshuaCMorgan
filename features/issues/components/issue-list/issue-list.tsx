@@ -6,17 +6,20 @@ import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
 import styles from "./issue-list.module.scss";
 import { IssueFilter } from "../issue-filter";
+import { useFilter } from "../issue-filter/use-filter";
 
 export function IssueList() {
   const router = useRouter();
+  const { filters } = useFilter();
+
   const page = Number(router.query.page || 1);
   const navigateToPage = (newPage: number) =>
     router.push({
       pathname: router.pathname,
-      query: { page: newPage },
+      query: { page: newPage, ...filters },
     });
 
-  const issuesPage = useGetIssues(page);
+  const issuesPage = useGetIssues(page, filters);
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
