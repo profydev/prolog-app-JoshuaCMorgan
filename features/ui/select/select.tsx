@@ -93,8 +93,8 @@ export function Select({
     handleChange(option);
   }
 
-  function isSelected(option: string) {
-    return value?.value === option;
+  function isSelected(option: SelectOption) {
+    return value?.value === option.value;
   }
 
   function validationHint() {
@@ -119,7 +119,10 @@ export function Select({
           )}
           tabIndex={0}
           onBlur={() => setShowList(false)}
-          onClick={() => {
+          onClick={(e) => {
+            console.log(e.target);
+            console.log(e.currentTarget);
+
             if (!disabled) {
               setShowList((prev) => !prev);
             }
@@ -142,10 +145,12 @@ export function Select({
       >
         <ul className={styles.items} ref={listRef}>
           {options.map((option) => {
-            const selectedOption = isSelected(option.label);
+            const selectedOption = isSelected(option);
             return (
               <li
                 onClick={() => {
+                  console.log("inside list click");
+
                   selectOption(option);
                   setShowList(false);
                 }}
@@ -186,6 +191,8 @@ export function Select({
           <li
             className={styles.listItem}
             onClick={() => {
+              console.log("inside clear option");
+
               handleChange(undefined);
               setShowList(false);
             }}

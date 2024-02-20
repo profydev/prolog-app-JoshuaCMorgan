@@ -5,7 +5,7 @@ import { useFilter } from "./use-filter";
 import { useState } from "react";
 
 const statusOptions = [
-  { value: "open", label: "Uresolved" },
+  { value: "open", label: "Unresolved" },
   { value: "resolved", label: "Resolved" },
 ];
 
