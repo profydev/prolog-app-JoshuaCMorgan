@@ -89,7 +89,7 @@ export function Select({
     <span className={styles.icon}>{chevronDown}</span>
   );
 
-  function selectOption(option: SelectOption) {
+  function selectOption(option: SelectOption | undefined) {
     handleChange(option);
   }
 
@@ -119,10 +119,7 @@ export function Select({
           )}
           tabIndex={0}
           onBlur={() => setShowList(false)}
-          onClick={(e) => {
-            console.log(e.target);
-            console.log(e.currentTarget);
-
+          onClick={() => {
             if (!disabled) {
               setShowList((prev) => !prev);
             }
@@ -149,8 +146,6 @@ export function Select({
             return (
               <li
                 onClick={() => {
-                  console.log("inside list click");
-
                   selectOption(option);
                   setShowList(false);
                 }}
@@ -187,18 +182,6 @@ export function Select({
               </li>
             );
           })}
-
-          <li
-            className={styles.listItem}
-            onClick={() => {
-              console.log("inside clear option");
-
-              handleChange(undefined);
-              setShowList(false);
-            }}
-          >
-            Clear Option
-          </li>
         </ul>
       </div>
     </div>

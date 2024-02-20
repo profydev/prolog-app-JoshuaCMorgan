@@ -55,6 +55,10 @@
   }
 }
 
+.select li:first-of-type {
+  color: color.$gray-500;
+}
+
 .icon {
   width: 20px;
   height: 20px;

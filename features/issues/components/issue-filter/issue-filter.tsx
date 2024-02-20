@@ -3,17 +3,7 @@ import styles from "./issue-filter.module.scss";
 import { IssueLevel, IssueStatus } from "@api/issues.types";
 import { useFilter } from "./use-filter";
 import { useState } from "react";
-
-const statusOptions = [
-  { value: "open", label: "Unresolved" },
-  { value: "resolved", label: "Resolved" },
-];
-
-const errorOptions = [
-  { value: "error", label: "Error" },
-  { value: "warning", label: "Warning" },
-  { value: "info", label: "Info" },
-];
+import { statusOptions, errorOptions } from "utils/options";
 
 export function IssueFilter() {
   const [statusValue, setStatusValue] = useState<
@@ -24,6 +14,18 @@ export function IssueFilter() {
   >(undefined);
 
   const { handleFilterChange } = useFilter();
+
+  function debounce(callback: { (value: string | undefined): void }) {
+    let timeout: NodeJS.Timeout | undefined;
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        callback(e.target.value);
+      }, 500);
+    };
+  }
+  console.log({ statusValue });
+  console.log(statusValue?.value.length === 0);
 
   return (
     <div className={styles.filterContainer}>
@@ -58,7 +60,7 @@ export function IssueFilter() {
                 status: option?.value as IssueStatus | undefined,
               });
             }}
-            value={statusValue}
+            value={statusValue?.value.length === 0 ? undefined : statusValue}
             placeholder="Status"
           />
           <Select
@@ -70,12 +72,17 @@ export function IssueFilter() {
                 level: option?.value as IssueLevel | undefined,
               });
             }}
-            value={errorValue}
+            value={errorValue?.value.length === 0 ? undefined : errorValue}
             placeholder="Level"
           />
           <Input
+            type="search"
             className={styles.input}
+            placeholder="Project Name"
             iconSrc={"/icons/hour-glass.svg"}
+            onChange={debounce((value: string | undefined) => {
+              handleFilterChange({ project: value });
+            })}
           ></Input>
         </div>
       </div>
