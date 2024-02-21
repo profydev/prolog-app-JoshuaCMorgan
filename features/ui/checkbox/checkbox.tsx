@@ -10,7 +10,7 @@ export enum CheckboxSize {
 // type CheckboxProps = React.InputHTMLAttributes<HTMLInputElement>
 
 type CheckboxProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   size?: CheckboxSize;
   checked?: boolean;
   disabled?: boolean;
@@ -36,7 +36,7 @@ export function Checkbox({
   return (
     <label className={classNames(styles[size], styles.checkboxWrapper)}>
       <input {...props} type="checkbox" ref={inputRef} />
-      <span>{children}</span>
+      {children ? <span>{children}</span> : ""}
     </label>
   );
 }

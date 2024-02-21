@@ -36,6 +36,8 @@ using 'inline-flex', container occupies only necessary space on line.
 
   & input {
     /*  Remove the native styling from the checkbox and apply custom styles.  */
+    display: flex;
+    flex-shrink: 0;
     appearance: none;
     border: 1px solid color.$gray-300;
     cursor: pointer;
