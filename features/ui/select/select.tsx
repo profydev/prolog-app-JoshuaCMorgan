@@ -149,7 +149,7 @@ export function Select({
                   selectOption(option);
                   setShowList(false);
                 }}
-                key={option.value}
+                key={option.label}
                 className={classNames(
                   styles.listItem,
                   selectedOption ? styles.selected : "",

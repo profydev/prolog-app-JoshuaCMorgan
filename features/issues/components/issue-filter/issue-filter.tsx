@@ -24,8 +24,6 @@ export function IssueFilter() {
       }, 500);
     };
   }
-  console.log({ statusValue });
-  console.log(statusValue?.value.length === 0);
 
   return (
     <div className={styles.filterContainer}>
