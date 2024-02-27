@@ -11,19 +11,27 @@ describe("Issue List", () => {
     cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=1", {
       fixture: "issues-page-1.json",
     }).as("getIssuesPage1");
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=2", {
-      fixture: "issues-page-2.json",
-    }).as("getIssuesPage2");
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=3", {
-      fixture: "issues-page-3.json",
-    }).as("getIssuesPage3");
+    cy.intercept(
+      "GET",
+      "https://prolog-api.profy.dev/issue?page=2&status=&level=&project=",
+      {
+        fixture: "issues-page-2.json",
+      },
+    ).as("getIssuesPage2");
+    cy.intercept(
+      "GET",
+      "https://prolog-api.profy.dev/issue?page=3&status=&level=&project=",
+      {
+        fixture: "issues-page-3.json",
+      },
+    ).as("getIssuesPage3");
 
     // open issues page
     cy.visit(`http://localhost:3000/dashboard/issues`);
 
     // wait for request to resolve
     cy.wait(["@getProjects", "@getIssuesPage1"]);
-    cy.wait(500);
+    cy.wait(1000);
 
     // set button aliases
     cy.get("button").contains("Previous").as("prev-button");
@@ -61,6 +69,7 @@ describe("Issue List", () => {
           cy.wrap($el).find("td").eq(-1).should("have.text", issue.numUsers);
         });
     });
+
     it("paginates the data", () => {
       // test first page
       cy.contains("Page 1 of 3");
