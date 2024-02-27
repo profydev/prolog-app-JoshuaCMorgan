@@ -56,7 +56,7 @@ export function IssueList() {
                   Issue
                 </Checkbox>
               </th>
-              <div className={styles.headerCell}>Graph: 14d</div>
+              <th className={styles.headerCell}>Graph: 14d</th>
               <th className={styles.headerCell}>Level</th>
               <th className={styles.headerCell}>Events</th>
               <th className={styles.headerCell}>Users</th>
