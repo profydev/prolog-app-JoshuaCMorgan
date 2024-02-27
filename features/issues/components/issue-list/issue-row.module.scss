@@ -16,11 +16,11 @@
   composes: cell;
   display: flex;
   align-items: center;
+  gap: space.$s3;
 }
 
 .languageIcon {
   width: space.$s10;
-  margin-right: space.$s3;
 }
 
 .errorTypeAndMessage {
