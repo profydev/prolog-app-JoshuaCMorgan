@@ -26,7 +26,7 @@ export function IssueFilter() {
   }
 
   return (
-    <div className={styles.filterContainer}>
+    <div data-cy="issue-filter-container" className={styles.filterContainer}>
       <div className={styles.filterContent}>
         <Button size={ButtonSize.lg} className={styles.resolveBtn}>
           <span className={styles.icon}>
@@ -48,7 +48,7 @@ export function IssueFilter() {
           </span>
           Resolve selected issues
         </Button>
-        <div className={styles.filters}>
+        <div className={styles.filters} data-cy="issue-filters">
           <Select
             className={styles.select}
             options={statusOptions}
