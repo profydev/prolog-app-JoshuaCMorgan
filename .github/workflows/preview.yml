@@ -3,7 +3,10 @@ env:
   NEXT_PUBLIC_API_BASE_URL: ${{vars.NEXT_PUBLIC_API_BASE_URL}}
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-on: pull-request
+on:
+  push:
+    branches-ignore:
+      - main
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
