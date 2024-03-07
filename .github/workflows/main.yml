@@ -1,4 +1,8 @@
 name: CI
+env:
+  NEXT_PUBLIC_API_BASE_URL: ${{vars.NEXT_PUBLIC_API_BASE_URL}}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
@@ -11,7 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code ...
       - uses: actions/checkout@v3
+      - name: Setup Node 18 and Cache Dependencies ...
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
@@ -36,22 +42,21 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: install
-    env:
-      NEXT_PUBLIC_API_BASE_URL: ${{vars.NEXT_PUBLIC_API_BASE_URL}}
+    needs: lint
 
     steps:
+      - name: Checkout Code...
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Install Vercel CLI...
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information ...
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts ...
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Upload Build Artifacts...
+        uses: actions/upload-artifacts@v4
         with:
-          node-version: "18"
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: nextjs-build
+          name: build-artifacts
           path: .next/
 
   e2e:
@@ -65,12 +70,23 @@ jobs:
           node-version: "18"
           cache: "npm"
       - run: npm ci
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - name: Download build Artifacts...
+        uses: actions/download-artifact@v4
         with:
-          name: nextjs-build
+          name: build-artifacts
           path: .next/
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
           start: npm start
+
+  Deploy-Preview:
+    runs-on: ubuntu-latest
+    needs: e2e
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Build Artifacts...
+        uses: actions/download-artifacts@v4
+        path: .next/
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
