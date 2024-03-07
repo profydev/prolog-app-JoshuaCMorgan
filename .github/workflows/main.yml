@@ -47,12 +47,14 @@ jobs:
     steps:
       - name: Checkout Code...
       - uses: actions/checkout@v3
+      - run: ls -a .
       - name: Install Vercel CLI...
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information ...
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts ...
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - run: ls -a .
       - name: Upload Build Artifacts...
         uses: actions/upload-artifacts@v4
         with:
@@ -88,5 +90,6 @@ jobs:
       - name: Download Build Artifacts...
         uses: actions/download-artifacts@v4
         path: .next/
+      - run: ls -a .
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
