@@ -30,6 +30,7 @@ const statusTexts = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   const { name, language, numIssues, numEvents24h, status } = project;
+  const searchParams = new URLSearchParams({ project: name });
 
   return (
     <div className={styles.container}>
@@ -63,7 +64,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
       <div className={styles.bottomContainer}>
-        <Link href={Routes.issues} className={styles.viewIssuesAnchor}>
+        <Link
+          data-cy={"view-issues-link"}
+          href={`${Routes.issues}/?${searchParams}`}
+          className={styles.viewIssuesAnchor}
+        >
           View issues
         </Link>
       </div>
