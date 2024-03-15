@@ -1,6 +1,6 @@
 export const statusOptions = [
   { value: "", label: "Status" },
-  { value: "open", label: "Unresolved" },
+  { value: "open", label: "Open" },
   { value: "resolved", label: "Resolved" },
 ];
 

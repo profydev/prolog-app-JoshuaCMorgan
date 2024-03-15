@@ -2,18 +2,10 @@ import { Select, Button, ButtonSize, Input } from "@features/ui";
 import styles from "./issue-filter.module.scss";
 import { IssueLevel, IssueStatus } from "@api/issues.types";
 import { useFilter } from "./use-filter";
-import { useState } from "react";
 import { statusOptions, errorOptions } from "utils/options";
 
 export function IssueFilter() {
-  const [statusValue, setStatusValue] = useState<
-    (typeof statusOptions)[0] | undefined
-  >(undefined);
-  const [errorValue, setErrorValue] = useState<
-    (typeof errorOptions)[0] | undefined
-  >(undefined);
-
-  const { handleFilterChange } = useFilter();
+  const { handleFilterChange, filters } = useFilter();
 
   function debounce(callback: { (value: string | undefined): void }) {
     let timeout: NodeJS.Timeout | undefined;
@@ -53,24 +45,22 @@ export function IssueFilter() {
             className={styles.select}
             options={statusOptions}
             handleChange={(option) => {
-              setStatusValue(option);
               handleFilterChange({
                 status: option?.value as IssueStatus | undefined,
               });
             }}
-            value={statusValue?.value.length === 0 ? undefined : statusValue}
+            value={filters.status}
             placeholder="Status"
           />
           <Select
             className={styles.select}
             options={errorOptions}
             handleChange={(option) => {
-              setErrorValue(option);
               handleFilterChange({
                 level: option?.value as IssueLevel | undefined,
               });
             }}
-            value={errorValue?.value.length === 0 ? undefined : errorValue}
+            value={filters.level}
             placeholder="Level"
           />
           <Input
