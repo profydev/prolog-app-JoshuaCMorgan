@@ -23,6 +23,7 @@
     flex: 1;
     color: color.$gray-900;
     font: font.$text-md-regular;
+    text-transform: capitalize;
   }
 
   & .hasError {

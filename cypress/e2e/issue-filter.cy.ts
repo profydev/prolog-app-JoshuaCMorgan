@@ -37,7 +37,7 @@ describe("Issue Filter", () => {
 
     it("renders the filters", () => {
       /* parent container exists */
-      cy.get("[data-cy='issue-filter-container']").should("exist");
+      cy.get("[data-cy='issue-filters']").should("exist");
 
       /* filters exists */
       cy.get("[data-cy='issue-filters']").should("exist");
@@ -56,9 +56,9 @@ describe("Issue Filter", () => {
 
     it("returns appropriate params for each Status filter selection", () => {
       const statusParams = [
-        ["Unresolved", "status=open"],
+        ["Open", "status=open"],
         ["Resolved", "status=resolved"],
-        ["Status", "status="],
+        ["Status", ""],
       ];
 
       statusParams.forEach((status) => {
@@ -77,7 +77,7 @@ describe("Issue Filter", () => {
         ["Error", "level=error"],
         ["Warning", "level=warning"],
         ["Info", "level=info"],
-        ["Level", "level="],
+        ["Level", ""],
       ];
 
       levelParams.forEach((status) => {

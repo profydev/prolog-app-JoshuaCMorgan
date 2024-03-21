@@ -50,7 +50,7 @@ type SelectProps = React.DetailedHTMLProps<
   options: SelectOption[];
   icon?: React.ReactNode;
   handleChange: (value: SelectOption | undefined) => void;
-  value?: SelectOption;
+  value?: string;
   labelText?: string;
   placeholder?: string;
   errorMessage?: string;
@@ -94,7 +94,7 @@ export function Select({
   }
 
   function isSelected(option: SelectOption) {
-    return value?.value === option.value;
+    return value === option.value;
   }
 
   function validationHint() {
@@ -131,7 +131,7 @@ export function Select({
           <span
             className={classNames(value ? styles.value : styles.placeholder)}
           >
-            {value?.label || placeholder}
+            {value || placeholder}
           </span>
           {suffix}
         </div>

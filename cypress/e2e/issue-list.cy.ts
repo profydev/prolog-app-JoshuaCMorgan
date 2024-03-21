@@ -65,8 +65,8 @@ describe("Issue List", () => {
         .each(($el, index) => {
           const issue = mockIssues1.items[index];
 
-          cy.wrap($el).find("td").eq(-2).should("have.text", issue.numEvents);
-          cy.wrap($el).find("td").eq(-1).should("have.text", issue.numUsers);
+          cy.wrap($el).find("td").eq(-2).contains(issue.numEvents);
+          cy.wrap($el).find("td").eq(-1).contains(issue.numUsers);
         });
     });
 

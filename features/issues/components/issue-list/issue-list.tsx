@@ -50,14 +50,13 @@ export function IssueList() {
         <table className={styles.table}>
           <thead>
             <tr className={styles.headerRow}>
-              <th className={styles.headerCell}></th>
-              <th className={styles.headerCell}>Graph: 14d</th>
+              <th className={styles.headerCell}>Issues</th>
               <th className={styles.headerCell}>Level</th>
               <th className={styles.headerCell}>Events</th>
               <th className={styles.headerCell}>Users</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles.tbody}>
             {(items || []).map((issue) => (
               <IssueRow
                 key={issue.id}
@@ -68,7 +67,7 @@ export function IssueList() {
           </tbody>
         </table>
         <div className={styles.paginationContainer}>
-          <div>
+          <div className={styles.buttonContainer}>
             <button
               className={styles.paginationButton}
               onClick={() => navigateToPage(page - 1)}

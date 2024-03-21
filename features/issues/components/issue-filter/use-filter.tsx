@@ -10,9 +10,17 @@ export const useFilter = () => {
     project: router.query.project,
   } as IssueFilters;
 
+  function removeEmptyFilters(filters: IssueFilters) {
+    return Object.fromEntries(
+      Object.entries(filters).filter(([, value]) => {
+        return Boolean(value) && value !== "";
+      }),
+    );
+  }
+
   function handleFilterChange(filters: IssueFilters) {
-    const query = { ...router.query, ...filters };
-    router.push({ query });
+    const query = removeEmptyFilters({ ...router.query, ...filters });
+    router.push({ pathname: router.pathname, query });
   }
 
   return { handleFilterChange, filters };

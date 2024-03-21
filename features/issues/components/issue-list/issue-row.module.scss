@@ -1,9 +1,32 @@
 @use "@styles/color";
 @use "@styles/space";
 @use "@styles/font";
+@use "@styles/breakpoint";
 
-.row:nth-child(2n) {
-  background: color.$gray-50;
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "issue issue issue"
+    "level events users";
+  margin-bottom: 8px;
+  border: 1px solid color.$gray-200;
+  box-shadow:
+    0 4px 8px -2px rgb(16 24 40 / 10%),
+    0 2px 4px -2px rgb(16 24 40 / 6%);
+  border-radius: space.$s2;
+
+  @media (min-width: breakpoint.$desktop) {
+    display: table-row;
+    margin-bottom: auto;
+    border: none;
+    box-shadow: none;
+    border-radius: auto;
+
+    .row:nth-child(2n) {
+      background: color.$gray-50;
+    }
+  }
 }
 
 .cell {
@@ -12,7 +35,30 @@
   font: font.$text-sm-regular;
 }
 
+.statsCell {
+  justify-self: center;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  @media (min-width: breakpoint.$desktop) {
+    display: table-cell;
+    text-align: left;
+  }
+}
+
+.statsLabel {
+  display: block;
+  text-align: center;
+
+  @media (min-width: breakpoint.$desktop) {
+    display: none;
+  }
+}
+
 .issueCell {
+  grid-area: issue;
   composes: cell;
   display: flex;
   align-items: center;
