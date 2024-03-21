@@ -37,7 +37,7 @@ describe("Issue Filter", () => {
 
     it("renders the filters", () => {
       /* parent container exists */
-      cy.get("[data-cy='issue-filter-container']").should("exist");
+      cy.get("[data-cy='issue-filters']").should("exist");
 
       /* filters exists */
       cy.get("[data-cy='issue-filters']").should("exist");
