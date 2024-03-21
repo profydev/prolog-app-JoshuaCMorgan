@@ -10,7 +10,6 @@ $desktop breakpoint works well with iPad Pro rotation
   display: flex;
   gap: space.$s4;
   flex-direction: column;
-
   @media (min-width: breakpoint.$desktop) {
     flex-direction: row;
     justify-content: flex-end;

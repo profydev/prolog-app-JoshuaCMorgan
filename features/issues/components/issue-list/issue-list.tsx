@@ -56,7 +56,7 @@ export function IssueList() {
               <th className={styles.headerCell}>Users</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles.tbody}>
             {(items || []).map((issue) => (
               <IssueRow
                 key={issue.id}

@@ -4,6 +4,7 @@ import { ProjectLanguage } from "@api/projects.types";
 import { IssueLevel } from "@api/issues.types";
 import type { Issue } from "@api/issues.types";
 import styles from "./issue-row.module.scss";
+import classNames from "classnames";
 
 type IssueRowProps = {
   projectLanguage: ProjectLanguage;
@@ -37,14 +38,22 @@ export function IssueRow({ projectLanguage, issue }: IssueRowProps) {
           <div>{firstLineOfStackTrace}</div>
         </div>
       </td>
-
-      <td className={styles.cell}>
+      <td className={classNames(styles.cell, styles.statsCell)}>
+        <span className={styles.statsLabel}>Level</span>
         <Badge color={levelColors[level]} size={BadgeSize.sm}>
           {capitalize(level)}
         </Badge>
       </td>
-      <td className={styles.cell}>{numEvents}</td>
-      <td className={styles.cell}>{numUsers}</td>
+      <td className={classNames(styles.cell, styles.statsCell)}>
+        {" "}
+        <span className={styles.statsLabel}>Events</span>
+        {numEvents}
+      </td>
+      <td className={classNames(styles.cell, styles.statsCell)}>
+        {" "}
+        <span className={styles.statsLabel}>Users</span>
+        {numUsers}
+      </td>
     </tr>
   );
 }
