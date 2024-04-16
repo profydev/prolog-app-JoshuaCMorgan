@@ -1,0 +1,48 @@
+@use "@styles/color";
+@use "@styles/breakpoint";
+@use "@styles/space";
+@use "@styles/font";
+
+.header {
+  width: 100%;
+  height: 80px;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: space.$s8;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (min-width: breakpoint.$desktop) {
+    flex-direction: row;
+  }
+
+  & a {
+    color: color.$gray-500;
+    text-decoration: none;
+    text-transform: capitalize;
+    font: font.$text-md-medium;
+  }
+}
+
+.dashboardButton {
+  display: block;
+  text-decoration: none;
+  background-color: color.$primary-600;
+  color: color.$white;
+  padding: space.$s2-625 space.$s4-125;
+  border-radius: space.$s2;
+
+  &:hover {
+    background-color: color.$primary-700;
+  }
+}
