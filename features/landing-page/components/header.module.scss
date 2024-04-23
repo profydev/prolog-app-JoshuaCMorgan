@@ -2,16 +2,83 @@
 @use "@styles/breakpoint";
 @use "@styles/space";
 @use "@styles/font";
+@use "@styles/misc";
+@use "@styles/z-index";
 
 .header {
   width: 100%;
-  height: 80px;
-  padding: 0 2rem;
+  height: misc.$header-height;
+  padding: space.$s0 space.$s4;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
+  z-index: z-index.$header;
+
+  @media (min-width: breakpoint.$desktop) {
+    padding: 0 space.$s8;
+  }
+}
+
+.nav {
+  position: fixed;
+  top: misc.$header-height;
+  left: 0;
+  bottom: 0;
+  width: 19.5rem;
+  padding: space.$s4;
+  display: flex;
+  flex-direction: column;
+
+  // flex: 1;
+  background: color.$white;
+  transform: translateX(-100%);
+  transition: transform 300ms;
+  justify-content: space-between;
+
+  &.isMobileMenuOpen {
+    transform: translateX(0);
+  }
+
+  @media (min-width: breakpoint.$desktop) {
+    position: relative;
+    top: 0;
+
+    // width: auto;
+    padding: 0;
+    transform: none;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+  }
+}
+
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: color.$gray-700;
+  z-index: -1;
+  transform: translateX(100%);
+  opacity: 0;
+  transition:
+    opacity 300ms,
+    transform 0s 300ms;
+
+  &.isMobileMenuOpen {
+    opacity: 0.1;
+    transform: translateX(0);
+    transition:
+      opacity 300ms,
+      transform 0s 0s;
+  }
+
+  @media (min-width: breakpoint.$desktop) {
+    display: none;
+  }
 }
 
 .linkList {
@@ -24,6 +91,8 @@
 
   @media (min-width: breakpoint.$desktop) {
     flex-direction: row;
+    justify-content: center;
+    flex: 1;
   }
 
   & a {
@@ -45,4 +114,14 @@
   &:hover {
     background-color: color.$primary-700;
   }
+}
+
+.menuButton {
+  @media (min-width: breakpoint.$desktop) {
+    display: none;
+  }
+}
+
+.menuIcon {
+  display: block;
 }
