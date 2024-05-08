@@ -14,7 +14,8 @@
   justify-content: space-between;
   align-items: center;
   background: white;
-  z-index: z-index.$header;
+
+  // z-index: z-index.$header;
 
   @media (min-width: breakpoint.$desktop) {
     padding: 0 space.$s8;
@@ -69,7 +70,7 @@
     transform 0s 300ms;
 
   &.isMobileMenuOpen {
-    opacity: 0.1;
+    opacity: 0.17;
     transform: translateX(0);
     transition:
       opacity 300ms,

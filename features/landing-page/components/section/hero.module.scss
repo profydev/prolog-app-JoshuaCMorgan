@@ -1,0 +1,55 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+@use "@styles/breakpoint";
+
+.section {
+  position: relative;
+  z-index: -2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: space.$s16 space.$s4;
+  background-color: color.$gray-50;
+
+  @media (min-width: breakpoint.$desktop) {
+    padding: space.$s24 space.$s8;
+  }
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  color: color.$gray-900;
+  font: font.$display-md-semibold;
+
+  @media (min-width: breakpoint.$desktop) {
+    font: font.$display-xl-semibold;
+  }
+}
+
+.subTitle {
+  width: 100%;
+  max-width: 40.5rem;
+  margin: space.$s4 0 space.$s16;
+  text-align: center;
+  color: color.$gray-700;
+  font: font.$text-lg-regular;
+
+  @media (min-width: breakpoint.$desktop) {
+    margin: space.$s6 0 space.$s16;
+    font: font.$text-xl-regular;
+  }
+}
+
+.image {
+  // width: 343px;
+  // height: 200.307px;
+  max-width: 100%;
+  height: auto;
+
+  // @media (min-width: breakpoint.$desktop) {
+  //   width: 753.676px;
+  //   height: 445.894px;
+  // }
+}
