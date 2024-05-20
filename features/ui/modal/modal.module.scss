@@ -1,0 +1,27 @@
+@use "@styles/color";
+@use "@styles/breakpoint";
+@use "@styles/space";
+@use "@styles/font";
+@use "@styles/misc";
+@use "@styles/shadow";
+
+.modalContainer {
+  position: fixed;
+  inset: 0;
+  background-color: rgba($color: #000, $alpha: 35%);
+
+  /* Background blur/md */
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  padding: 24px;
+  border-radius: 8px;
+  width: 352px;
+  height: auto;
+  background: color.$white;
+  box-shadow: shadow.$xl;
+}
