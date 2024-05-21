@@ -1,0 +1,53 @@
+@use "@styles/color";
+@use "@styles/breakpoint";
+@use "@styles/space";
+@use "@styles/font";
+@use "@styles/misc";
+@use "@styles/shadow";
+
+.contactButton {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  padding: 1rem;
+  background: #7f56d9;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #6941c6;
+  }
+}
+
+.content {
+  text-align: center;
+}
+
+.subTitle {
+  font: font.$text-sm-regular;
+  color: color.$gray-500;
+}
+
+.title {
+  color: color.$gray-900;
+  font: font.$text-lg-medium;
+  text-transform: capitalize;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buttonGroup > button {
+  flex: 1;
+  text-transform: capitalize;
+}
+
+.emailLink {
+  color: color.$white;
+  text-decoration: none;
+}

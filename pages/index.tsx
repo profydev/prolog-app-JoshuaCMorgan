@@ -1,5 +1,5 @@
+import { ContactModal } from "../features/landing-page/components/contact-modal/contact-modal";
 import Head from "next/head";
-import styles from "./index.module.scss";
 import { Header, Section } from "@features/landing-page";
 import { Page } from "@api/content.types";
 import { getContentPage } from "@api/content";
@@ -33,17 +33,7 @@ const HomePage = ({ page }: InferGetStaticPropsType<typeof getStaticProps>) => {
       {page.sections.map((section, index) => {
         return <Section key={index} section={section}></Section>;
       })}
-      <button
-        className={styles.contactButton}
-        onClick={() =>
-          alert(
-            "Implement this in Challenge 2 - Modal:\n\nhttps://profy.dev/rjs-challenge-modal",
-          )
-        }
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/message.svg" alt="Contact" />
-      </button>
+      <ContactModal />
     </>
   );
 };

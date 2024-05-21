@@ -5,3 +5,4 @@ export * from "./loading";
 export * from "./select";
 export * from "./input";
 export * from "./checkbox";
+export * from "./modal";
