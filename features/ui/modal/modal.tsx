@@ -14,18 +14,21 @@ function useMounted() {
 }
 
 type ModalProps = {
-  children: React.ReactNode;
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onModalClose: () => void;
+  children: (props: { close: () => void }) => React.ReactNode;
+  triggerModal: (props: { open: () => void }) => React.ReactNode;
 };
 
-export function Modal({ children, onModalClose }: ModalProps) {
+export function Modal({ children, triggerModal }: ModalProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null as HTMLDivElement | null);
   const mounted = useMounted();
 
   useEffect(() => {
     const keyListener = (event: KeyboardEvent) => {
       const listener = keyListenersMap.get(event.keyCode);
+      console.log(listener);
+      console.log(event);
+
       return listener && listener(event);
     };
 
@@ -56,21 +59,31 @@ export function Modal({ children, onModalClose }: ModalProps) {
   };
 
   const keyListenersMap = new Map([
-    [27, onModalClose],
+    [27, () => setIsOpen(false)],
     [9, handleTabKey],
   ]);
+
+  const modalControls = {
+    close: () => setIsOpen(false),
+    open: () => setIsOpen(true),
+  };
 
   if (!mounted) return null;
 
   return createPortal(
-    <div
-      ref={modalRef}
-      className={styles.modalContainer}
-      role="dialog"
-      aria-modal="true"
-    >
-      <div className={styles.modalContent}>{children}</div>
-    </div>,
+    <>
+      {isOpen && (
+        <div
+          ref={modalRef}
+          className={styles.modalContainer}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className={styles.modalContent}>{children(modalControls)}</div>
+        </div>
+      )}
+      {triggerModal(modalControls)}
+    </>,
     document.body,
   );
 }
