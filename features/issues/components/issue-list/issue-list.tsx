@@ -13,13 +13,14 @@ export function IssueList() {
   const { filters } = useFilter();
 
   const page = Number(router.query.page || 1);
+
   const navigateToPage = (newPage: number) =>
     router.push({
       pathname: router.pathname,
-      query: { page: newPage, ...filters },
+      query: { ...filters, page: newPage },
     });
 
-  const issuesPage = useGetIssues(page, filters);
+  const issuesPage = useGetIssues({ ...filters, page });
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {

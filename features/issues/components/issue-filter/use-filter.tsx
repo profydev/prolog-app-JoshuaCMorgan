@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { IssueFilters } from "@api/issues.types";
+import { IssueListParams } from "@api/issues.types";
 
 export const useFilter = () => {
   const router = useRouter();
@@ -8,9 +8,9 @@ export const useFilter = () => {
     status: router.query.status,
     level: router.query.level,
     project: router.query.project,
-  } as IssueFilters;
+  } as IssueListParams;
 
-  function removeEmptyFilters(filters: IssueFilters) {
+  function removeEmptyFilters(filters: IssueListParams) {
     return Object.fromEntries(
       Object.entries(filters).filter(([, value]) => {
         return Boolean(value) && value !== "";
@@ -18,7 +18,7 @@ export const useFilter = () => {
     );
   }
 
-  function handleFilterChange(filters: IssueFilters) {
+  function handleFilterChange(filters: IssueListParams) {
     const query = removeEmptyFilters({ ...router.query, ...filters });
     router.push({ pathname: router.pathname, query });
   }
