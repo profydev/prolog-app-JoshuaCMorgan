@@ -4,7 +4,8 @@ import { IssueListParams } from "@api/issues.types";
 export const useFilter = () => {
   const router = useRouter();
 
-  const filters = {
+  const params = {
+    page: Number(router.query.page || 1),
     status: router.query.status,
     level: router.query.level,
     project: router.query.project,
@@ -18,10 +19,10 @@ export const useFilter = () => {
     );
   }
 
-  function handleFilterChange(filters: IssueListParams) {
-    const query = removeEmptyFilters({ ...router.query, ...filters });
+  function updateFilters(filters: IssueListParams) {
+    const query = removeEmptyFilters({ ...params, ...filters });
     router.push({ pathname: router.pathname, query });
   }
 
-  return { handleFilterChange, filters };
+  return { updateFilters, filters: params };
 };

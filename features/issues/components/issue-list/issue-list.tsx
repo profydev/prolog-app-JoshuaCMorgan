@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { ProjectLanguage } from "@api/projects.types";
 import { Loading } from "@features/ui";
 import { useGetProjects } from "@features/projects";
@@ -9,18 +8,9 @@ import { IssueFilter } from "../issue-filter";
 import { useFilter } from "../issue-filter/use-filter";
 
 export function IssueList() {
-  const router = useRouter();
-  const { filters } = useFilter();
+  const { updateFilters, filters } = useFilter();
 
-  const page = Number(router.query.page || 1);
-
-  const navigateToPage = (newPage: number) =>
-    router.push({
-      pathname: router.pathname,
-      query: { ...filters, page: newPage },
-    });
-
-  const issuesPage = useGetIssues({ ...filters, page });
+  const issuesPage = useGetIssues(filters);
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
@@ -71,15 +61,19 @@ export function IssueList() {
           <div className={styles.buttonContainer}>
             <button
               className={styles.paginationButton}
-              onClick={() => navigateToPage(page - 1)}
-              disabled={page === 1}
+              onClick={() =>
+                updateFilters({ page: filters.page ? filters.page - 1 : 1 })
+              }
+              disabled={filters.page === 1}
             >
               Previous
             </button>
             <button
               className={styles.paginationButton}
-              onClick={() => navigateToPage(page + 1)}
-              disabled={page === meta?.totalPages}
+              onClick={() =>
+                updateFilters({ page: filters.page ? filters.page + 1 : 1 })
+              }
+              disabled={filters.page === meta?.totalPages}
             >
               Next
             </button>
