@@ -46,6 +46,7 @@ export function IssueFilter() {
         className={styles.input}
         placeholder="Project Name"
         iconSrc={"/icons/hour-glass.svg"}
+        value={filters.project || ""}
         onChange={debounce((value: string | undefined) => {
           updateFilter({ project: value });
         })}
