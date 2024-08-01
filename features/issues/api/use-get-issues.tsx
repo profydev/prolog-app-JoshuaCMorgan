@@ -2,32 +2,35 @@ import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getIssues } from "@api/issues";
 import type { Page } from "@typings/page.types";
-import type { Issue, IssueFilters } from "@api/issues.types";
+import type { Issue, IssueListParams } from "@api/issues.types";
 
 const QUERY_KEY = "issues";
 
-export function getQueryKey(page?: number, filters?: IssueFilters) {
-  if (page === undefined) {
-    return [QUERY_KEY];
-  }
-  return [QUERY_KEY, page, filters];
+export function getQueryKey(params: IssueListParams) {
+  return [QUERY_KEY, ...Object.values(params)];
 }
 
-export function useGetIssues(page: number, filters: IssueFilters) {
+export function useGetIssues(params: IssueListParams) {
   const query = useQuery<Page<Issue>, Error>(
-    getQueryKey(page, filters),
-    ({ signal }) => getIssues(page, filters, { signal }),
+    getQueryKey(params),
+    ({ signal }) => getIssues(params, { signal }),
     { keepPreviousData: true },
   );
 
   // Prefetch the next page!
   const queryClient = useQueryClient();
+  const paramsJson = JSON.stringify(params);
+
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
-      queryClient.prefetchQuery(getQueryKey(page + 1, filters), ({ signal }) =>
-        getIssues(page + 1, filters, { signal }),
-      );
+      const params: IssueListParams = JSON.parse(paramsJson);
+      if (params.page) {
+        const nextPageParams = { ...params, page: params.page + 1 };
+        queryClient.prefetchQuery(getQueryKey(nextPageParams), ({ signal }) =>
+          getIssues(nextPageParams, { signal }),
+        );
+      }
     }
-  }, [query.data, page, filters, queryClient]);
+  }, [query.data, paramsJson, queryClient]);
   return query;
 }

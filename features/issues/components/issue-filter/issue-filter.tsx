@@ -5,7 +5,7 @@ import { useFilter } from "./use-filter";
 import { statusOptions, errorOptions } from "utils/options";
 
 export function IssueFilter() {
-  const { handleFilterChange, filters } = useFilter();
+  const { updateFilter, filters } = useFilter();
 
   function debounce(callback: { (value: string | undefined): void }) {
     let timeout: NodeJS.Timeout | undefined;
@@ -23,8 +23,8 @@ export function IssueFilter() {
         className={styles.select}
         options={statusOptions}
         handleChange={(option) => {
-          handleFilterChange({
-            status: option?.value as IssueStatus | undefined,
+          updateFilter({
+            status: option?.value as IssueStatus,
           });
         }}
         value={filters.status}
@@ -34,8 +34,8 @@ export function IssueFilter() {
         className={styles.select}
         options={errorOptions}
         handleChange={(option) => {
-          handleFilterChange({
-            level: option?.value as IssueLevel | undefined,
+          updateFilter({
+            level: option?.value as IssueLevel,
           });
         }}
         value={filters.level}
@@ -46,8 +46,9 @@ export function IssueFilter() {
         className={styles.input}
         placeholder="Project Name"
         iconSrc={"/icons/hour-glass.svg"}
+        value={filters.project || ""}
         onChange={debounce((value: string | undefined) => {
-          handleFilterChange({ project: value });
+          updateFilter({ project: value });
         })}
       ></Input>
     </div>

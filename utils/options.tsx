@@ -1,12 +1,14 @@
+import { IssueLevel, IssueStatus } from "@api/issues.types";
+
 export const statusOptions = [
   { value: "", label: "Status" },
-  { value: "open", label: "Open" },
-  { value: "resolved", label: "Resolved" },
+  { value: IssueStatus.open, label: "Open" },
+  { value: IssueStatus.resolved, label: "Resolved" },
 ];
 
 export const errorOptions = [
   { value: "", label: "Level" },
-  { value: "error", label: "Error" },
-  { value: "warning", label: "Warning" },
-  { value: "info", label: "Info" },
+  { value: IssueLevel.error, label: "Error" },
+  { value: IssueLevel.warning, label: "Warning" },
+  { value: IssueLevel.info, label: "Info" },
 ];
