@@ -10,7 +10,6 @@ export async function getIssues(
 ) {
   const { data } = await axios.get<Page<Issue>>(ENDPOINT, {
     params,
-
     signal: options?.signal,
   });
 

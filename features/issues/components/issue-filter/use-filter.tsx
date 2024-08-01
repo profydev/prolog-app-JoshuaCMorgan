@@ -1,15 +1,29 @@
-import { useRouter } from "next/router";
-import { IssueListParams } from "@api/issues.types";
+import { NextRouter, useRouter } from "next/router";
+import { IssueLevel, IssueStatus, IssueListParams } from "@api/issues.types";
+import { z } from "zod";
+
+const QueryParamsSchema = z.object({
+  page: z
+    .string()
+    .optional()
+    .transform((str) => Number(str) || 1),
+  status: z.nativeEnum(IssueStatus).optional(),
+  level: z.nativeEnum(IssueLevel).optional(),
+  project: z.string().optional(),
+});
+
+function parseQueryParams(query: NextRouter["query"]) {
+  const parsed = QueryParamsSchema.safeParse(query);
+
+  if (!parsed.success) {
+    return { page: 1 };
+  }
+  return parsed.data;
+}
 
 export const useFilter = () => {
   const router = useRouter();
-
-  const params = {
-    page: Number(router.query.page || 1),
-    status: router.query.status,
-    level: router.query.level,
-    project: router.query.project,
-  } as IssueListParams;
+  const queryParams = parseQueryParams(router.query);
 
   function removeEmptyFilters(filters: IssueListParams) {
     return Object.fromEntries(
@@ -19,10 +33,11 @@ export const useFilter = () => {
     );
   }
 
-  function updateFilters(filters: IssueListParams) {
-    const query = removeEmptyFilters({ ...params, ...filters });
+  function updateFilter(filters: Partial<IssueListParams>) {
+    const updatedFilter = { ...queryParams, ...filters };
+    const query = removeEmptyFilters(updatedFilter);
     router.push({ pathname: router.pathname, query });
   }
 
-  return { updateFilters, filters: params };
+  return { updateFilter, filters: queryParams };
 };

@@ -20,6 +20,7 @@ export function useGetIssues(params: IssueListParams) {
   // Prefetch the next page!
   const queryClient = useQueryClient();
   const paramsJson = JSON.stringify(params);
+
   useEffect(() => {
     if (query.data?.meta.hasNextPage) {
       const params: IssueListParams = JSON.parse(paramsJson);

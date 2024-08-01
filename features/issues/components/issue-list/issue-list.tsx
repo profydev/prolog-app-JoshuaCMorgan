@@ -8,7 +8,7 @@ import { IssueFilter } from "../issue-filter";
 import { useFilter } from "../issue-filter/use-filter";
 
 export function IssueList() {
-  const { updateFilters, filters } = useFilter();
+  const { updateFilter, filters } = useFilter();
 
   const issuesPage = useGetIssues(filters);
   const projects = useGetProjects();
@@ -61,18 +61,14 @@ export function IssueList() {
           <div className={styles.buttonContainer}>
             <button
               className={styles.paginationButton}
-              onClick={() =>
-                updateFilters({ page: filters.page ? filters.page - 1 : 1 })
-              }
+              onClick={() => updateFilter({ page: filters.page - 1 })}
               disabled={filters.page === 1}
             >
               Previous
             </button>
             <button
               className={styles.paginationButton}
-              onClick={() =>
-                updateFilters({ page: filters.page ? filters.page + 1 : 1 })
-              }
+              onClick={() => updateFilter({ page: filters.page + 1 })}
               disabled={filters.page === meta?.totalPages}
             >
               Next
