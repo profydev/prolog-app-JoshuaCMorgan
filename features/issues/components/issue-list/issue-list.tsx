@@ -6,11 +6,15 @@ import { IssueRow } from "./issue-row";
 import styles from "./issue-list.module.scss";
 import { IssueFilter } from "../issue-filter";
 import { useFilter } from "../issue-filter/use-filter";
-
+import { useThrottle } from "@uidotdev/usehooks";
 export function IssueList() {
   const { updateFilter, filters } = useFilter();
 
-  const issuesPage = useGetIssues(filters);
+  const throttledProjectFilter = useThrottle(filters.project, 500);
+  const issuesPage = useGetIssues({
+    ...filters,
+    project: throttledProjectFilter,
+  });
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
