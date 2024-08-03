@@ -7,16 +7,6 @@ import { statusOptions, errorOptions } from "utils/options";
 export function IssueFilter() {
   const { updateFilter, filters } = useFilter();
 
-  function debounce(callback: { (value: string | undefined): void }) {
-    let timeout: NodeJS.Timeout | undefined;
-    return (e: React.ChangeEvent<HTMLInputElement>) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        callback(e.target.value);
-      }, 500);
-    };
-  }
-
   return (
     <div className={styles.filters} data-cy="issue-filters">
       <Select
@@ -47,9 +37,7 @@ export function IssueFilter() {
         placeholder="Project Name"
         iconSrc={"/icons/hour-glass.svg"}
         value={filters.project || ""}
-        onChange={debounce((value: string | undefined) => {
-          updateFilter({ project: value });
-        })}
+        onChange={(e) => updateFilter({ project: e.target.value })}
       ></Input>
     </div>
   );
